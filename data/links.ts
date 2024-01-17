@@ -1,3 +1,5 @@
+import { LinkedInIcon, TwitterIcon } from '@/components/icons';
+
 export const navlinks = [
   {
     label: 'Home',
@@ -10,5 +12,20 @@ export const navlinks = [
   {
     label: 'Blogs',
     href: '/blogs',
+  },
+  {
+    label: 'Contact',
+    href: '/contact',
+  },
+];
+
+export const socialLinks = [
+  {
+    href: 'https://github.com/sushantchapagain1',
+    icon: LinkedInIcon,
+  },
+  {
+    href: 'https://twitter.com/TraflGarDLaw77',
+    icon: TwitterIcon,
   },
 ];

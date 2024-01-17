@@ -12,6 +12,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  /* TODO */
+  --forground-text: black;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +22,9 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+
+    /* TODO */
+    --forground-text: #f3f3f3;
   }
 }
 
@@ -43,4 +49,9 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+/* doint it here cz -webkit-text-stroke property is not available in tailwind */
+.stroke-name {
+  -webkit-text-stroke: 1px var(--forground-text);
 }
