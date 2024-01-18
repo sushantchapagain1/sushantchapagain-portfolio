@@ -1,14 +1,16 @@
+import { socialLinks } from '@/data/links';
 import Link from 'next/link';
+import SocailIcon from './SocailIcon';
 
 function Main() {
   return (
     <main className="p-10 md:p-20">
-      <h1 className=" stroke-name mt-3 w-full text-3xl font-bold text-transparent md:mt-12 md:text-6xl">
+      <h1 className="stroke-name mt-3 w-full text-3xl font-bold text-transparent md:mt-12 md:text-6xl">
         I&apos;m Sushant Chapagain
       </h1>
 
-      <div className=" text-gray-300">
-        <p className="mt-6 ">
+      <div className="text-gray-300">
+        <p className="mt-6">
           a software developer who specializes in developing scalable,
           accessible, and responsive web applications with user interfaces using
           JavaScript. Additionally, I have some experience in building mobile
@@ -33,7 +35,11 @@ function Main() {
             here
           </Link>
           or you can contact me through my social media handles.
-          <div className="mt-3 flex gap-3"></div>
+          <div className="mt-3 flex gap-3">
+            {socialLinks.map((socialLink) => (
+              <SocailIcon key={socialLink.href} {...socialLink} />
+            ))}
+          </div>
         </div>
       </div>
     </main>
