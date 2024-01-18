@@ -6,7 +6,15 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        // Doing :dark:some-css is ok but we can use css variables to control in a single file.
+        // the trick is giving same name of varible on different prefers color scheme.
+        forgroundText: 'var(--forground-text)',
+        cardBackground: 'var(--cardBackground)',
+        lightText: 'var(--light-text)',
+      },
+    },
   },
   plugins: [],
 };

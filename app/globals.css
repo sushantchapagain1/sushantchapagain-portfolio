@@ -7,21 +7,24 @@
   --border-radius: 12px;
 
   --forground-text: #020a13;
-  --bg: #fffdfc;
+  --app-bg: #fffdfc;
+  --cardBackground: rgba(255, 255, 255, 0.08);
+  --light-text: #545454;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --forground-text: #f3f3f3;
-    --bg: #020a13;
+    --app-bg: #020a13;
+    --cardBackground: rgba(255, 255, 255, 0.08);
+    --light-text: #c6c6c6;
   }
 }
 
 body {
-  color: var(--forground-text);
   max-width: var(--max-width);
   margin: 0 auto;
-  background-color: var(--bg);
+  background-color: var(--app-bg);
 }
 
 /* doint it here cz -webkit-text-stroke property is not available in tailwind */

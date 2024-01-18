@@ -9,7 +9,7 @@ function Main() {
         I&apos;m Sushant Chapagain
       </h1>
 
-      <div className="text-gray-300">
+      <div className="text-forgroundText font-light">
         <p className="mt-6">
           a software developer who specializes in developing scalable,
           accessible, and responsive web applications with user interfaces using
@@ -21,7 +21,7 @@ function Main() {
           <Link
             href="https://www.bytefaucet.com/"
             target="_blank"
-            className="ml-2 border-b pb-1 font-bold"
+            className="border-forgroundText ml-2 border-b pb-1 font-semibold"
           >
             Bytefaucet technology&nbsp;
           </Link>
@@ -31,7 +31,10 @@ function Main() {
 
         <div className="mb-4">
           If you would like to collab, you can dm me
-          <Link href="/contact" className="mx-2 border-b pb-1">
+          <Link
+            href="/contact"
+            className="border-forgroundText mx-2 border-b pb-1 font-semibold"
+          >
             here
           </Link>
           or you can contact me through my social media handles.
