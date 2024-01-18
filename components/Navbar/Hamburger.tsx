@@ -16,13 +16,13 @@ function Hamburger() {
     >
       <span
         className={cn(
-          'h-[1.5px] w-7 rounded bg-white transition-all duration-300',
+          'bg-foregroundText h-[1.5px] w-7 rounded transition-all duration-300',
           isOpen ? 'w-7 rotate-45' : '',
         )}
       ></span>
       <span
         className={cn(
-          'h-[1.5px] w-5 rounded bg-white transition-all duration-300',
+          'bg-foregroundText h-[1.5px] w-5 rounded transition-all duration-300',
           isOpen ? 'w-7 -rotate-45' : '',
         )}
       ></span>

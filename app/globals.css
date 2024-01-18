@@ -6,15 +6,15 @@
   --max-width: 1100px;
   --border-radius: 12px;
 
-  --forground-text: #020a13;
+  --foreground-text: #020a13;
   --app-bg: #fffdfc;
-  --cardBackground: rgba(255, 255, 255, 0.08);
+  --cardBackground: rgba(0, 0, 0, 0.027);
   --light-text: #545454;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --forground-text: #f3f3f3;
+    --foreground-text: #f3f3f3;
     --app-bg: #020a13;
     --cardBackground: rgba(255, 255, 255, 0.08);
     --light-text: #c6c6c6;
@@ -29,7 +29,7 @@ body {
 
 /* doint it here cz -webkit-text-stroke property is not available in tailwind */
 .stroke-name {
-  -webkit-text-stroke: 1px var(--forground-text);
+  -webkit-text-stroke: 1px var(--foreground-text);
   position: relative;
 }
 
@@ -38,7 +38,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  color: var(--forground-text);
+  color: var(--foreground-text);
   width: 0;
   overflow: hidden;
 }

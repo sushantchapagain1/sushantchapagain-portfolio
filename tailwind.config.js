@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         // Doing :dark:some-css is ok but we can use css variables to control in a single file.
         // the trick is giving same name of varible on different prefers color scheme.
-        forgroundText: 'var(--forground-text)',
+        foregroundText: 'var(--foreground-text)',
         cardBackground: 'var(--cardBackground)',
         lightText: 'var(--light-text)',
       },

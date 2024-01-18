@@ -4,7 +4,11 @@ import { SunIcon } from '../icons';
 function ThemeToggle() {
   return (
     <button className="hidden md:block">
-      <SunIcon height={24} width={24} className="cursor-pointer" />
+      <SunIcon
+        height={24}
+        width={24}
+        className="text-foregroundText cursor-pointer"
+      />
     </button>
   );
 }

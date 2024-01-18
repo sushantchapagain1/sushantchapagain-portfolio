@@ -16,7 +16,7 @@ function Navlinks() {
           return (
             <li
               key={link.href}
-              className={cn('text-gray-400', isActive ? 'text-white' : '')}
+              className={cn('font-light text-lightText', isActive ? '' : '')}
             >
               <Link href={link.href}>{link.label}</Link>
             </li>
