@@ -5,26 +5,15 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  /* TODO */
-  --forground-text: black;
+  --forground-text: #020a13;
+  --bg: #fffdfc;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    /* TODO */
     --forground-text: #f3f3f3;
+    --bg: #020a13;
   }
 }
 
@@ -35,9 +24,10 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: var(--forground-text);
   max-width: var(--max-width);
   margin: 0 auto;
+  background-color: var(--bg);
 }
 
 a {
@@ -45,13 +35,32 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
 /* doint it here cz -webkit-text-stroke property is not available in tailwind */
 .stroke-name {
   -webkit-text-stroke: 1px var(--forground-text);
+  position: relative;
+}
+
+.stroke-name::after {
+  content: "I'm Sushant Chapagain";
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--forground-text);
+  width: 0;
+  overflow: hidden;
+}
+.stroke-name:hover::after {
+  white-space: nowrap;
+  animation: nameAnimate 0.5s linear both;
+  cursor: pointer;
+}
+
+@keyframes nameAnimate {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }

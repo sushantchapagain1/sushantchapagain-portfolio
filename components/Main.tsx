@@ -19,9 +19,9 @@ function Main() {
           <Link
             href="https://www.bytefaucet.com/"
             target="_blank"
-            className="ml-2 font-bold underline"
+            className="ml-2 border-b pb-1 font-bold"
           >
-            Bytefaucet technology
+            Bytefaucet technology&nbsp;
           </Link>
           to build a Hospital Management Systems, Content Management Systems,
           and various interactive user interfaces.
@@ -29,7 +29,7 @@ function Main() {
 
         <div className="mb-4">
           If you would like to collab, you can dm me
-          <Link href="/contact" className="mx-2 underline">
+          <Link href="/contact" className="mx-2 border-b pb-1">
             here
           </Link>
           or you can contact me through my social media handles.
