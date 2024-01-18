@@ -1,7 +1,7 @@
-import React from 'react';
+import Main from '@/components/Main';
 
 function page() {
-  return <div className="">page</div>;
+  return <Main />;
 }
 
 export default page;
