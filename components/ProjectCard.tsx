@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import { GitHubIcon } from './icons';
+import { GitHubIcon, WebsiteIcon } from './icons';
 import Link from 'next/link';
 
 export type PropsType = {
@@ -8,9 +8,8 @@ export type PropsType = {
   thumbnail: string;
   description: string;
   techStacks: string[];
-  isPrivateRepo: boolean;
-  repo: string;
-  demo: string;
+  repoUrl: string;
+  demoUrl: string;
 };
 
 function ProjectCard({
@@ -18,10 +17,12 @@ function ProjectCard({
   thumbnail,
   description,
   techStacks,
-  isPrivateRepo,
-  repo,
-  demo,
+  repoUrl,
+  demoUrl,
 }: PropsType) {
+  const isHosted = Boolean(demoUrl);
+  const hasRepoUrl = Boolean(repoUrl);
+
   return (
     <li className="max-h-[420px] overflow-hidden rounded-xl bg-cardBackground transition-all hover:shadow-md">
       <Image
@@ -35,16 +36,29 @@ function ProjectCard({
         <div className="flex justify-between">
           <h2 className="font-medium text-foregroundText">{title}</h2>
 
-          {!isPrivateRepo && repo !== null && (
-            <Link href={repo} target="_blank">
-              <GitHubIcon
-                height={22}
-                width={22}
-                className="fill-foregroundText"
-                color="text-foregroundText"
-              />
-            </Link>
-          )}
+          <div className="flex gap-3">
+            {isHosted && (
+              <Link href={demoUrl} target="_blank">
+                <WebsiteIcon
+                  height={22}
+                  width={22}
+                  className="fill-foregroundText"
+                  color="text-foregroundText"
+                />
+              </Link>
+            )}
+
+            {hasRepoUrl && (
+              <Link href={repoUrl} target="_blank">
+                <GitHubIcon
+                  height={22}
+                  width={22}
+                  className="fill-foregroundText"
+                  color="text-foregroundText"
+                />
+              </Link>
+            )}
+          </div>
         </div>
         <p className="my-3 max-h-28 overflow-hidden text-sm font-light text-lightText">
           {description}
