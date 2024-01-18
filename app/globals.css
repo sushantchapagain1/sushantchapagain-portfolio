@@ -17,22 +17,11 @@
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   color: var(--forground-text);
   max-width: var(--max-width);
   margin: 0 auto;
   background-color: var(--bg);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 /* doint it here cz -webkit-text-stroke property is not available in tailwind */

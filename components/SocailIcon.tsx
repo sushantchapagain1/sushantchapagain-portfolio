@@ -9,7 +9,7 @@ function SocailIcon({
 }) {
   return (
     <Link href={href} target="_blank">
-      <Icon className="h-6 w-6 flex-none fill-gray-500 transition hover:fill-gray-200 " />
+      <Icon className="h-6 w-6 flex-none fill-gray-500 transition hover:fill-gray-200" />
     </Link>
   );
 }
