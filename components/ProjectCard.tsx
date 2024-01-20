@@ -8,8 +8,8 @@ export type PropsType = {
   thumbnail: string;
   description: string;
   techStacks: string[];
-  repoUrl: string;
-  demoUrl: string;
+  repoUrl: string | null;
+  demoUrl: string | null;
 };
 
 function ProjectCard({
@@ -38,7 +38,7 @@ function ProjectCard({
 
           <div className="flex gap-3">
             {isHosted && (
-              <Link href={demoUrl} target="_blank">
+              <Link href={demoUrl ?? ''} target="_blank">
                 <WebsiteIcon
                   height={22}
                   width={22}
@@ -49,7 +49,7 @@ function ProjectCard({
             )}
 
             {hasRepoUrl && (
-              <Link href={repoUrl} target="_blank">
+              <Link href={repoUrl ?? ''} target="_blank">
                 <GitHubIcon
                   height={22}
                   width={22}
