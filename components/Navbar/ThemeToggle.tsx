@@ -1,14 +1,10 @@
 import React from 'react';
-import { SunIcon } from '../icons';
+import { ThemeToogleIcon } from '../icons';
 
 function ThemeToggle() {
   return (
     <button className="hidden md:block">
-      <SunIcon
-        height={24}
-        width={24}
-        className="text-foregroundText cursor-pointer"
-      />
+      <ThemeToogleIcon height={24} width={24} className="fill-foregroundText" />
     </button>
   );
 }
