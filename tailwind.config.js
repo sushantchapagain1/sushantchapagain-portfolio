@@ -13,6 +13,7 @@ module.exports = {
         foregroundText: 'var(--foreground-text)',
         cardBackground: 'var(--cardBackground)',
         lightText: 'var(--light-text)',
+        cardBorder: 'var(--cardBorder)',
       },
     },
   },

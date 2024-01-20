@@ -14,13 +14,9 @@ export const navlinks = [
     label: 'Projects',
     href: '/projects',
   },
-  // {
-  //   label: 'Blogs',
-  //   href: '/blogs',
-  // },
   {
-    label: 'Contact',
-    href: '/contact',
+    label: 'Blogs',
+    href: '/blogs',
   },
 ];
 

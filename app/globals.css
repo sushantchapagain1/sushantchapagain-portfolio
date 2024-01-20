@@ -10,6 +10,7 @@
   --app-bg: #fffdfc;
   --cardBackground: rgba(0, 0, 0, 0.027);
   --light-text: #545454;
+  --cardBorder: #020a132a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,6 +19,7 @@
     --app-bg: #020a13;
     --cardBackground: rgba(255, 255, 255, 0.08);
     --light-text: #c6c6c6;
+    --cardBorder: #3b434c;
   }
 }
 

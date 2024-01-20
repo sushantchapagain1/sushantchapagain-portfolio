@@ -1,5 +1,12 @@
 import ProjectCard from '@/components/ProjectCard';
 import { projects } from '@/data/projects';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Projects',
+  description:
+    'Explore my projects by looking at the source code and demo url.',
+};
 
 function page() {
   return (
