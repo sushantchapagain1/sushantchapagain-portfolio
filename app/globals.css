@@ -10,6 +10,7 @@
   --app-bg: #fffdfc;
   --cardBackground: rgba(0, 0, 0, 0.027);
   --light-text: #545454;
+  --navlinks: #000;
   --cardBorder: #020a132a;
 }
 
@@ -18,6 +19,7 @@
   --app-bg: #020a13;
   --cardBackground: rgba(255, 255, 255, 0.08);
   --light-text: #c6c6c6;
+  --navlinks: #fff;
   --cardBorder: #3b434c;
 }
 
@@ -42,9 +44,10 @@ body {
   width: 0;
   overflow: hidden;
 }
-.stroke-name:hover::after {
+
+.stroke-name::after {
   white-space: nowrap;
-  animation: nameAnimate 0.5s linear both;
+  animation: nameAnimate 2s linear both;
   cursor: pointer;
 }
 
