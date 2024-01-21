@@ -1,15 +1,16 @@
 import { socialLinks } from '@/data/links';
 import Link from 'next/link';
 import SocailIcon from './SocailIcon';
+import BlogCard from '@/app/blogs/_components/BlogCard';
 
 function Main() {
   return (
-    <main className="p-10 md:p-20">
-      <h1 className="stroke-name mt-3 w-full text-3xl font-bold text-transparent md:mt-12 md:text-6xl">
+    <main className="mt-12 p-3 sm:mt-20 md:mt-12">
+      <h1 className="stroke-name mt-3 w-fit text-2xl font-bold text-transparent sm:text-4xl md:mt-12 md:text-6xl">
         I&apos;m Sushant Chapagain
       </h1>
 
-      <div className="text-foregroundText font-light">
+      <div className="font-light text-foregroundText">
         <p className="mt-6">
           a software developer who specializes in developing scalable,
           accessible, and responsive web applications with user interfaces using
@@ -21,7 +22,7 @@ function Main() {
           <Link
             href="https://www.bytefaucet.com/"
             target="_blank"
-            className="ml-2 border-b border-forgroundText pb-1 font-medium"
+            className="border-forgroundText ml-2 border-b pb-1 font-medium"
           >
             Bytefaucet technology&nbsp;
           </Link>
@@ -30,12 +31,12 @@ function Main() {
         </div>
 
         <div className="mb-4">
-          If you would like to collab, you can dm me
+          If you would like to collab, you can send me a
           <Link
-            href="/contact"
-            className="mx-2 border-b border-forgroundText pb-1 font-medium"
+            href="mailto:sreddevil12@gmail.com"
+            className="border-forgroundText mx-2 border-b pb-1 font-medium"
           >
-            here
+            mail
           </Link>
           or you can contact me through my social media handles.
           <div className="mt-6 flex gap-6">

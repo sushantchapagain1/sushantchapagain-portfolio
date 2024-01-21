@@ -5,20 +5,22 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-
+}
+.light {
   --foreground-text: #020a13;
   --app-bg: #fffdfc;
   --cardBackground: rgba(0, 0, 0, 0.027);
   --light-text: #545454;
+  --navlinks: #000;
+  --cardBorder: #020a132a;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-text: #f3f3f3;
-    --app-bg: #020a13;
-    --cardBackground: rgba(255, 255, 255, 0.08);
-    --light-text: #c6c6c6;
-  }
+.dark {
+  --foreground-text: #f3f3f3;
+  --app-bg: #020a13;
+  --cardBackground: rgba(255, 255, 255, 0.08);
+  --light-text: #c6c6c6;
+  --navlinks: #fff;
+  --cardBorder: #3b434c;
 }
 
 body {
@@ -42,10 +44,10 @@ body {
   width: 0;
   overflow: hidden;
 }
-.stroke-name:hover::after {
+
+.stroke-name::after {
   white-space: nowrap;
-  animation: nameAnimate 0.5s linear both;
-  cursor: pointer;
+  animation: nameAnimate 1.8s linear both;
 }
 
 @keyframes nameAnimate {
