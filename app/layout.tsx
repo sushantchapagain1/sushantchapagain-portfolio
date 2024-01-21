@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer';
 import Head from './head';
 import { siteMetadata } from '@/data/metadata';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,13 +33,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <Head />
       <body className={inter.className}>
         <div className="grid min-h-screen grid-rows-[auto_1fr_auto] p-3">
-          <Navbar />
-          {children}
-          <Footer />
+          <ThemeProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </ThemeProvider>
         </div>
       </body>
     </html>
