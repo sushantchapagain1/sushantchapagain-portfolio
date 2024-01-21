@@ -17,8 +17,8 @@ function Navlinks() {
             <li
               key={link.href}
               className={cn(
-                'text-navlinks p-1 font-light transition',
-                isActive ? '' : '',
+                'hover:text-navlinks p-1 font-light text-lightText transition',
+                isActive ? 'text-navlinks border-b border-lightText' : '',
               )}
             >
               <Link href={link.href}>{link.label}</Link>

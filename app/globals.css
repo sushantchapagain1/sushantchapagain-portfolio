@@ -5,7 +5,8 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-
+}
+.light {
   --foreground-text: #020a13;
   --app-bg: #fffdfc;
   --cardBackground: rgba(0, 0, 0, 0.027);
@@ -13,7 +14,6 @@
   --navlinks: #000;
   --cardBorder: #020a132a;
 }
-
 .dark {
   --foreground-text: #f3f3f3;
   --app-bg: #020a13;
@@ -47,7 +47,7 @@ body {
 
 .stroke-name::after {
   white-space: nowrap;
-  animation: nameAnimate 2s linear both;
+  animation: nameAnimate 1.8s linear both;
 }
 
 @keyframes nameAnimate {
