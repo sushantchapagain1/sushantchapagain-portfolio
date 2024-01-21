@@ -48,7 +48,6 @@ body {
 .stroke-name::after {
   white-space: nowrap;
   animation: nameAnimate 2s linear both;
-  cursor: pointer;
 }
 
 @keyframes nameAnimate {
