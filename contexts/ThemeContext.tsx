@@ -11,7 +11,9 @@ const ThemeContext = createContext<ThemeContextProps | null>(null);
 
 function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useLocalStorage(
-    window.matchMedia('(prefers-color-scheme:dark)').matches, //get system color scheme.
+    (typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-color-scheme:dark)').matches) ||
+      'true', //get system color scheme.
     'isDarkMode',
   );
 

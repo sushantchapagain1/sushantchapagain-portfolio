@@ -8,7 +8,7 @@ type Props = {
 
 function BlogCard({ title, description, publishedDate }: Props) {
   return (
-    <div className="border-cardBorder mt-3 h-fit rounded-xl border p-6">
+    <div className="mt-3 h-fit rounded-xl border border-cardBorder p-6">
       <div className="flex items-center justify-between ">
         <h2 className="mb-6 text-3xl text-foregroundText">{title}</h2>
         <span className="text-lightText">{publishedDate}</span>
