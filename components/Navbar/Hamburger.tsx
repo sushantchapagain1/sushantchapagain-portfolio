@@ -10,20 +10,17 @@ function Hamburger() {
   }
 
   return (
-    <div
-      className="flex flex-col gap-2 md:hidden"
-      onClick={handleToggleHamburger}
-    >
+    <div className="flex flex-col md:hidden" onClick={handleToggleHamburger}>
       <span
         className={cn(
-          'bg-foregroundText h-[1.5px] w-7 rounded transition-all duration-300',
+          'h-[1.5px] w-7 rounded bg-foregroundText transition-all duration-300',
           isOpen ? 'w-7 rotate-45' : '',
         )}
       ></span>
       <span
         className={cn(
-          'bg-foregroundText h-[1.5px] w-5 rounded transition-all duration-300',
-          isOpen ? 'w-7 -rotate-45' : '',
+          'mt-2 h-[1.5px] w-5 rounded bg-foregroundText transition-all duration-300',
+          isOpen ? 'mt-0 w-7 -rotate-45' : '',
         )}
       ></span>
     </div>
