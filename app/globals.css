@@ -13,6 +13,7 @@
   --light-text: #545454;
   --navlinks: #000;
   --cardBorder: #020a132a;
+  --navigationBg: rgba(255, 255, 255, 0.97);
 }
 .dark {
   --foreground-text: #f3f3f3;
@@ -21,6 +22,7 @@
   --light-text: #c6c6c6;
   --navlinks: #fff;
   --cardBorder: #3b434c;
+  --navigationBg: rgba(0, 0, 0, 0.97);
 }
 
 body {

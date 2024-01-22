@@ -15,6 +15,7 @@ module.exports = {
         lightText: 'var(--light-text)',
         cardBorder: 'var(--cardBorder)',
         navlinks: 'var(--navlinks)',
+        navigationBg: 'var(--navigationBg)',
       },
     },
   },

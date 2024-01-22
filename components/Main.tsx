@@ -1,7 +1,6 @@
 import { socialLinks } from '@/data/links';
 import Link from 'next/link';
 import SocailIcon from './SocailIcon';
-import BlogCard from '@/app/blogs/_components/BlogCard';
 
 function Main() {
   return (
