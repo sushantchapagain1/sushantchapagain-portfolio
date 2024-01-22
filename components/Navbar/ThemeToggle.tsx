@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import { ThemeToogleIcon } from '../icons';
 import { useTheme } from '@/contexts/ThemeContext';

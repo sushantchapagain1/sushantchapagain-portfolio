@@ -23,6 +23,7 @@ function Navlinks() {
 
   return (
     <>
+      {/*  tw is first mobile first so resetting the styling from medium devices. */}
       <nav
         className={cn(
           'pointer-events-none invisible translate-y-full opacity-0 transition-all duration-700 md:pointer-events-auto md:visible md:translate-y-0 md:opacity-100',
