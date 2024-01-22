@@ -25,17 +25,15 @@ function Navlinks() {
     <>
       <nav
         className={cn(
-          isMenuOpen
-            ? 'bg-navigationBg absolute left-0 top-0 z-10 h-screen w-full md:hidden'
-            : '',
+          isMenuOpen &&
+            'bg-navigationBg absolute left-0 top-0 z-10 h-screen w-full md:relative md:h-auto md:bg-transparent',
         )}
       >
         <ul
           className={cn(
             'hidden gap-6 capitalize md:flex',
-            isMenuOpen
-              ? 'flex h-full flex-col items-center justify-center'
-              : '',
+            isMenuOpen &&
+              'flex h-full flex-col items-center justify-center md:flex-row',
           )}
         >
           {navlinks.map((link) => {
@@ -45,7 +43,7 @@ function Navlinks() {
                 key={link.href}
                 className={cn(
                   'p-1 font-light text-lightText transition hover:text-navlinks',
-                  isActive ? 'border-b border-lightText text-navlinks' : '',
+                  isActive && 'border-b border-lightText text-navlinks',
                 )}
                 onClick={closeMenu}
               >
@@ -56,7 +54,7 @@ function Navlinks() {
         </ul>
       </nav>
 
-      {/* need to pass down the props so lifted parent state */}
+      {/* not created context cz only need to pass down the tree by one parent.*/}
       <ThemeToggle isMenuOpen={isMenuOpen} />
       <Hamburger isMenuOpen={isMenuOpen} onToggleHamburger={handleMenuToggle} />
     </>

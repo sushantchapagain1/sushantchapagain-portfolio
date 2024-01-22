@@ -11,13 +11,13 @@ function Hamburger({ isMenuOpen, onToggleHamburger }: Props) {
       <span
         className={cn(
           'h-[1.5px] w-7 rounded bg-foregroundText transition-all duration-300',
-          isMenuOpen ? 'w-7 rotate-45' : '',
+          isMenuOpen && 'w-7 rotate-45',
         )}
       ></span>
       <span
         className={cn(
           'mt-2 h-[1.5px] w-5 rounded bg-foregroundText transition-all duration-300',
-          isMenuOpen ? 'mt-0 w-7 -rotate-45' : '',
+          isMenuOpen && 'mt-0 w-7 -rotate-45',
         )}
       ></span>
     </div>
