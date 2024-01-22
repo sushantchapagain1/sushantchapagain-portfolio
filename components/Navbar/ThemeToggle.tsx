@@ -12,8 +12,9 @@ function ThemeToggle({ isMenuOpen }: Props) {
   return (
     <button
       className={cn(
-        'hidden md:block',
-        isMenuOpen && 'absolute z-[99] block md:relative',
+        'opacity-0 md:translate-x-0 md:opacity-100',
+        isMenuOpen &&
+          'absolute z-[99] translate-x-0 opacity-100 transition-all duration-[3000ms] md:relative',
       )}
       onClick={toggleDarkMode}
     >
