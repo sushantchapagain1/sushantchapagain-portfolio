@@ -4,29 +4,62 @@ import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { navlinks } from '../../data/links';
+import Hamburger from './Hamburger';
+import { useState } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 function Navlinks() {
   const pathName = usePathname();
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  function handleMenuToggle() {
+    setIsMenuOpen((open) => !open);
+  }
+
+  function closeMenu() {
+    setIsMenuOpen(false);
+  }
+
   return (
-    <nav>
-      <ul className="hidden gap-6 capitalize md:flex">
-        {navlinks.map((link) => {
-          const isActive = pathName === link.href;
-          return (
-            <li
-              key={link.href}
-              className={cn(
-                'p-1 font-light text-lightText transition hover:text-navlinks',
-                isActive ? 'border-b border-lightText text-navlinks' : '',
-              )}
-            >
-              <Link href={link.href}>{link.label}</Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+    <>
+      <nav
+        className={cn(
+          isMenuOpen
+            ? 'bg-navigationBg absolute left-0 top-0 z-10 h-screen w-full md:hidden'
+            : '',
+        )}
+      >
+        <ul
+          className={cn(
+            'hidden gap-6 capitalize md:flex',
+            isMenuOpen
+              ? 'flex h-full flex-col items-center justify-center'
+              : '',
+          )}
+        >
+          {navlinks.map((link) => {
+            const isActive = pathName === link.href;
+            return (
+              <li
+                key={link.href}
+                className={cn(
+                  'p-1 font-light text-lightText transition hover:text-navlinks',
+                  isActive ? 'border-b border-lightText text-navlinks' : '',
+                )}
+                onClick={closeMenu}
+              >
+                <Link href={link.href}>{link.label}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      {/* need to pass down the props so lifted parent state */}
+      <ThemeToggle isMenuOpen={isMenuOpen} />
+      <Hamburger isMenuOpen={isMenuOpen} onToggleHamburger={handleMenuToggle} />
+    </>
   );
 }
 
