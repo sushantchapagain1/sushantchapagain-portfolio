@@ -25,8 +25,9 @@ function Navlinks() {
     <>
       <nav
         className={cn(
+          'pointer-events-none invisible translate-y-full opacity-0 transition-all duration-700 md:pointer-events-auto md:visible md:translate-y-0 md:opacity-100',
           isMenuOpen &&
-            'bg-navigationBg absolute left-0 top-0 z-10 h-screen w-full md:relative md:h-auto md:bg-transparent',
+            'bg-navigationBg pointer-events-auto visible absolute left-0 top-0 z-10 h-screen w-full translate-y-0 opacity-100 md:relative md:h-auto md:bg-transparent',
         )}
       >
         <ul
