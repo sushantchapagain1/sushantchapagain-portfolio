@@ -1,5 +1,4 @@
 import { socialLinks } from '@/data/links';
-import Link from 'next/link';
 import SocailIcon from './SocailIcon';
 
 function Main() {
@@ -17,32 +16,35 @@ function Main() {
           applications.
         </p>
         <div className="mb-4 mt-4">
-          For 1 year and a few months, I&apos;ve worked on Bytefaucet technology
-          <Link
-            href="https://www.bytefaucet.com/"
-            target="_blank"
-            className="border-forgroundText ml-2 border-b pb-1 font-medium"
-          >
-            Bytefaucet technology&nbsp;
-          </Link>
-          to build a Hospital Management Systems, Content Management Systems,
-          and various interactive user interfaces.
+          For 1 year and a few months, I&apos;ve worked to build a Hospital
+          Management Systems, Content Management Systems, and various
+          interactive user interfaces in companies.
         </div>
 
         <div className="mb-4">
           If you would like to collab, you can send me a
-          <Link
+          <a
             href="mailto:sreddevil12@gmail.com"
             className="border-forgroundText mx-2 border-b pb-1 font-medium"
           >
             mail
-          </Link>
+          </a>
           or you can contact me through my social media handles.
           <div className="mt-6 flex gap-6">
             {socialLinks.map((socialLink) => (
               <SocailIcon key={socialLink.href} {...socialLink} />
             ))}
           </div>
+        </div>
+
+        <div className="mt-9">
+          <a
+            href="https://docs.google.com/document/d/1NV0piV6K0yEAlNC7ASaBfMGQ0L7Qdfmu7JghaOdNe04/edit#heading=h.icq2uxfcutbb"
+            target="_blank"
+            className="border-b border-foregroundText py-2"
+          >
+            View Resume
+          </a>
         </div>
       </div>
     </main>
