@@ -49,7 +49,7 @@ export const projects = [
   `,
     repoUrl: 'https://github.com/sushantchapagain1/blog-app',
     demoUrl: null,
-    thumbnail: '/static/projects/mt-kailash-thumbnail.png',
+    thumbnail: '/static/projects/blog-app-thumbnail.png',
     techStacks: [
       'React JS',
       'PostgreSQL ',

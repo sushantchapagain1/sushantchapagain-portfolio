@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
 import { GitHubIcon, WebsiteIcon } from './icons';
-import Link from 'next/link';
 
 export type PropsType = {
   title: string;
@@ -38,25 +37,25 @@ function ProjectCard({
 
           <div className="flex gap-3">
             {isHosted && (
-              <Link href={demoUrl ?? ''} target="_blank">
+              <a href={demoUrl ?? ''} target="_blank">
                 <WebsiteIcon
                   height={22}
                   width={22}
                   className="fill-foregroundText"
                   color="text-foregroundText"
                 />
-              </Link>
+              </a>
             )}
 
             {hasRepoUrl && (
-              <Link href={repoUrl ?? ''} target="_blank">
+              <a href={repoUrl ?? ''} target="_blank">
                 <GitHubIcon
                   height={22}
                   width={22}
                   className="fill-foregroundText"
                   color="text-foregroundText"
                 />
-              </Link>
+              </a>
             )}
           </div>
         </div>
