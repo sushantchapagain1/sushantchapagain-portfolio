@@ -32,7 +32,7 @@ import React from 'react';
 // export default function Page({ params, searchParams }: Props) {}
 
 function page() {
-  return <div>blog detail</div>;
+  return <div className="text-foregroundText">blog detail</div>;
 }
 
 export default page;

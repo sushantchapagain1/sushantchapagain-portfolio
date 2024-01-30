@@ -7,22 +7,26 @@
   --border-radius: 12px;
 }
 .light {
-  --foreground-text: #020a13;
-  --app-bg: #fffdfc;
+  --foreground-text: rgb(2, 10, 19);
+  --app-bg: rgb(255, 253, 252);
   --cardBackground: rgba(0, 0, 0, 0.027);
-  --light-text: #545454;
-  --navlinks: #000;
-  --cardBorder: #020a132a;
+  --light-text: rgb(84, 84, 84);
+  --navlinks: rgb(0, 0, 0);
+  --cardBorder: rgba(2, 10, 19, 0.165);
   --navigationBg: rgba(255, 255, 255, 0.97);
+  --blogCardBg: #6866b00f;
+  --blogCardDarkBg: rgba(119, 116, 200, 0.071);
 }
 .dark {
-  --foreground-text: #f3f3f3;
-  --app-bg: #020a13;
+  --foreground-text: rgb(243, 243, 243);
+  --app-bg: rgb(2, 10, 19);
   --cardBackground: rgba(255, 255, 255, 0.08);
-  --light-text: #c6c6c6;
-  --navlinks: #fff;
-  --cardBorder: #3b434c;
+  --light-text: rgb(198, 198, 198);
+  --navlinks: rgb(255, 255, 255);
+  --cardBorder: rgb(59, 67, 76);
   --navigationBg: rgba(0, 0, 0, 0.97);
+  --blogCardBg: rgba(49, 46, 129, 0.141);
+  --blogCardDarkBg: rgba(128, 125, 205, 0.114);
 }
 
 body {

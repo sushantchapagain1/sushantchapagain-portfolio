@@ -23,10 +23,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
-
   twitter: {
     card: 'summary_large_image',
     images: [siteMetadata.openGraphImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    //By setting follow to true even if we have set disallow to some route it can see the links in that disallowed page or file.
   },
 };
 

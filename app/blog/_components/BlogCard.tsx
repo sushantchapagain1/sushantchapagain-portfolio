@@ -1,22 +1,35 @@
+import { ReadMoreIcon } from '@/components/icons';
+import Link from 'next/link';
 import React from 'react';
 
 type Props = {
   title: string;
+  slug: string;
   description: string;
-  publishedDate: string;
 };
 
-function BlogCard({ title, description, publishedDate }: Props) {
+function BlogCard({ title, description, slug }: Props) {
   return (
-    <div className="mt-3 h-fit rounded-xl border border-cardBorder p-6">
-      <div className="flex items-center justify-between ">
-        <h2 className="mb-6 text-3xl text-foregroundText">{title}</h2>
-        <span className="text-lightText">{publishedDate}</span>
+    <Link href={`/blog/${slug}`}>
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[var(--blogCardBg)] to-[var(--cardBackground)] p-4 shadow-md transition hover:bg-cardBackground">
+        <h2 className="mb-2 text-lg font-semibold text-foregroundText">
+          {title}
+        </h2>
+        <p className="text-sm font-light text-lightText">
+          {description.substring(0, 250)}...
+        </p>
+
+        <div className="flex justify-between">
+          <span className="absolute -bottom-3 -left-3 h-9 w-9 -rotate-45 rounded-r-full bg-[var(--blogCardDarkBg)]"></span>
+          <span></span>
+
+          <button className="flex text-xs text-lightText">
+            <span>Read More</span>
+            <ReadMoreIcon className="ml-2 h-4 w-4" stroke="currentColor" />
+          </button>
+        </div>
       </div>
-      <p className="font-light text-foregroundText">
-        {description.substring(0, 250)}...
-      </p>
-    </div>
+    </Link>
   );
 }
 
