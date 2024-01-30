@@ -83,14 +83,14 @@ export function ReadMoreIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
       viewBox="0 0 24 24"
+      strokeWidth="2"
       aria-hidden="true"
       {...props}
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M14 5l7 7m0 0l-7 7m7-7H3"
       ></path>
     </svg>

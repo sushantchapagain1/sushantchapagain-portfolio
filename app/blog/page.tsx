@@ -33,14 +33,6 @@ const blogs = [
     itaque reiciendis voluptatem neque officiis nesciunt eaque, soluta
     delectus maiores.`,
   },
-  {
-    id: '68c05868-778f-428294-d6018b880a2c',
-    slug: 'lorem-ipsum',
-    title: 'Behind the scenes of react',
-    description: ` Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam sapiente
-    itaque reiciendis voluptatem neque officiis nesciunt eaque, soluta
-    delectus maiores.`,
-  },
 ];
 
 function page() {
