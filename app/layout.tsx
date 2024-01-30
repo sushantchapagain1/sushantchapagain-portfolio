@@ -16,15 +16,18 @@ export const metadata: Metadata = {
   description: siteMetadata.description,
   keywords: siteMetadata.keywords,
   creator: siteMetadata.creator,
-  // When the link is shared on internet this is showned
-  // openGraph: {
-  //   title: siteMetadata.title,
-  //   description: siteMetadata.description,
-  //   url: './',
-  //   images: [siteMetadata.myImgUrl],
-  //   locale: 'en_US',
-  //   type: 'website',
-  // },
+  openGraph: {
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: [siteMetadata.openGraphImage],
+    locale: 'en_US',
+    type: 'website',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    images: [siteMetadata.openGraphImage],
+  },
 };
 
 export default function RootLayout({
