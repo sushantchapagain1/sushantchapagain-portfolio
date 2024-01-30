@@ -19,5 +19,5 @@ export const siteMetadata = {
     'node js developer',
     'react native developer',
   ],
-  openGraphImage: '/static/favicons/opengraph-image.png',
+  openGraphImage: '/static/favicons/og-image.png',
 };
