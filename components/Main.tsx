@@ -15,11 +15,11 @@ function Main() {
           JavaScript. Additionally, I have some experience in building mobile
           applications.
         </p>
-        <div className="mb-4 mt-4">
+        <p className="mb-4 mt-4">
           For 1 year and a few months, I&apos;ve worked to build a Hospital
           Management Systems, Content Management Systems, and various
           interactive user interfaces in companies.
-        </div>
+        </p>
 
         <div className="mb-4">
           If you would like to collab, you can send me a
@@ -30,11 +30,13 @@ function Main() {
             mail
           </a>
           or you can contact me through my social media handles.
-          <div className="mt-6 flex gap-6">
+          <ul className="mt-6 flex gap-6">
             {socialLinks.map((socialLink) => (
-              <SocailIcon key={socialLink.href} {...socialLink} />
+              <li key={socialLink.href}>
+                <SocailIcon {...socialLink} />
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         <div className="mt-9">
