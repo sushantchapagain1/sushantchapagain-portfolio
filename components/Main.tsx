@@ -3,7 +3,7 @@ import SocailIcon from './SocailIcon';
 
 function Main() {
   return (
-    <main className="mt-12 p-3 sm:mt-20 md:mt-12">
+    <main className="my-12 p-3 sm:mt-20">
       <h1 className="stroke-name mt-3 w-fit text-2xl font-bold text-transparent sm:text-4xl md:mt-12 md:text-6xl">
         I&apos;m Sushant Chapagain
       </h1>
