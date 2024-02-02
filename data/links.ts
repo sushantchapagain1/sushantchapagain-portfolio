@@ -14,10 +14,10 @@ export const navlinks = [
     label: 'Projects',
     href: '/projects',
   },
-  // {
-  //   label: 'Blog',
-  //   href: '/blog',
-  // },
+  {
+    label: 'Blog',
+    href: '/blog',
+  },
 ];
 
 export const socialLinks = [
