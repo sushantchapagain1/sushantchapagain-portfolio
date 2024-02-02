@@ -7,7 +7,10 @@ type Props = {
 
 function Hamburger({ isMenuOpen, onToggleHamburger }: Props) {
   return (
-    <div className="z-50 flex flex-col md:hidden" onClick={onToggleHamburger}>
+    <button
+      className="z-50 flex flex-col md:hidden"
+      onClick={onToggleHamburger}
+    >
       <span
         className={cn(
           'h-[1.5px] w-7 rounded bg-foregroundText transition-all duration-300',
@@ -20,7 +23,7 @@ function Hamburger({ isMenuOpen, onToggleHamburger }: Props) {
           isMenuOpen && 'mt-0 w-7 -rotate-45',
         )}
       ></span>
-    </div>
+    </button>
   );
 }
 

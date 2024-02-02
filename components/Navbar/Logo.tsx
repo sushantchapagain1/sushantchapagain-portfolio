@@ -10,6 +10,7 @@ function Logo() {
         width={50}
         className="fill-foregroundText"
         color="text-foregroundText"
+        role="img"
       />
     </Link>
   );
