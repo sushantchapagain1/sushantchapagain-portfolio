@@ -12,12 +12,17 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
 const computedFields: ComputedFields = {
-  slug: { type: 'string', resolve: (doc) => `/${doc._raw.flattenedPath}` },
-  slugAsParam: {
+  slug: {
     type: 'string',
-    resolve: (doc) =>
-      `/${doc._raw.flattenedPath.split('/').slice(1).join('/')}`,
+    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
   },
+
+  // we can pass any property name here with some calculations.
+  // slugAsParam: {
+  //   type: 'string',
+  //   resolve: (doc) =>
+  //     `/${doc._raw.flattenedPath.split('/').slice(1).join('/')}`,
+  // },
 };
 
 export const Blog = defineDocumentType(() => ({

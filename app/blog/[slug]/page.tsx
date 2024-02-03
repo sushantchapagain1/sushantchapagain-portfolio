@@ -1,38 +1,74 @@
 import React from 'react';
+import type { Metadata } from 'next';
 
-// TODO Blog managment using dynamic metadata.
-// import type { Metadata, ResolvingMetadata } from 'next';
+import { allBlogs } from '@/.contentlayer/generated';
+import NotFound from '@/app/not-found';
+import { siteMetadata } from '@/data/metadata';
 
-// type Props = {
-//   params: { id: string };
-//   searchParams: { [key: string]: string | string[] | undefined };
-// };
+import Mdx from '../_components/Mdx';
 
-// export async function generateMetadata(
-//   { params, searchParams }: Props,
-//   parent: ResolvingMetadata,
-// ): Promise<Metadata> {
-//   // read route params
-//   const blogId = params.id;
+type Params = {
+  params: {
+    slug: string;
+  };
+};
 
-//   // fetch data
-//   const blog = await fetch(`https://.../${id}`).then((res) => res.json());
+export async function generateMetadata({
+  params,
+}: Params): Promise<Metadata | undefined> {
+  const blog = allBlogs.find((blog) => blog.slug === params.slug);
+  if (!blog) {
+    return;
+  }
 
-//   // optionally access and extend (rather than replace) parent metadata
-//   const previousImages = (await parent).openGraph?.images || [];
+  return {
+    title: blog.title,
+    description: blog.description,
+    openGraph: {
+      title: blog.title,
+      description: blog.description,
+      siteName: blog.title,
+      publishedTime: blog.publishedAt,
+      locale: 'en_US',
+      type: 'article',
+      url: './',
+      authors: siteMetadata.creator,
+      images: [
+        {
+          url: '/opengraph-image.png',
+          alt: blog.title,
+          width: 1000,
+          height: 600,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.description,
+      images: ['/opengraph-image.png'],
+    },
+  };
+}
 
-//   return {
-//     title: product.title,
-//     openGraph: {
-//       images: ['/some-specific-page-image.jpg', ...previousImages],
-//     },
-//   };
-// }
+async function page({ params }: Params) {
+  const blog = allBlogs.find((blog) => blog.slug === params.slug);
 
-// export default function Page({ params, searchParams }: Props) {}
+  if (!blog) return <NotFound />;
 
-function page() {
-  return <div className="text-foregroundText">blog detail</div>;
+  return (
+    <article className="my-12 text-foregroundText">
+      <div className="mb-9 rounded-md bg-cardBackground p-3">
+        <h1 className="text-lg font-medium sm:text-xl md:text-2xl">
+          {blog.title}
+        </h1>
+        <span className="text-sm text-lightText">
+          {blog.minuteRead} min read
+        </span>
+      </div>
+      <Mdx code={blog.body.code} />
+    </article>
+  );
 }
 
 export default page;
