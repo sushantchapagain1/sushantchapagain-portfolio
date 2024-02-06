@@ -1,12 +1,19 @@
 import React, { Fragment } from 'react';
 import { useMDXComponent } from 'next-contentlayer/hooks';
+import Image from 'next/image';
 
-function Rest({ children }: { children: React.ReactNode }) {
-  return <Fragment>{children}</Fragment>;
+function ImageMdx(props: { alt: string; src: string }) {
+  return <Image {...props} alt={props.alt} className="rounded-md" />;
+}
+
+function RowHorizontal({ children }: { children: React.ReactNode }) {
+  return <div className="mt-3 flex gap-9">{children}</div>;
 }
 
 const components = {
-  Rest,
+  // All components that we pass only can be used in mdx
+  Image: ImageMdx,
+  RowHorizontal,
 };
 
 function Mdx({ code }: { code: string }) {

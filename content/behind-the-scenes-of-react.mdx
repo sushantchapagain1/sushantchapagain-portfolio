@@ -1,9 +1,34 @@
 ---
 title: 'Behind the scenes of how react works.'
-minuteRead: 5
+minuteRead: 10
 description: 'Simple explanation of how React works behind the scenes and some important concepts to know in React'
 publishedAt: '2024-01-28'
 type: Blog
 ---
 
-Ullamco et nostrud magna commodo nostrud ...
+Let's start with the basics by understanding what a component is and how it works.
+A component is like a blueprint or template of a UI that returns a React element in the element tree, usually written in JSX.
+From this blueprint or template, we can create one or multiple component instances when we use the component.
+Each component instance has its own state, props, and lifecycle methods mount, update/rerender, and unmount (more about this later).
+
+<RowHorizontal>
+<Image
+  src="/static/blogs/component-blueprint.png"
+  alt="component-blueprint image"
+  width="320"
+  height="320"
+/>
+
+<Image
+  src="/static/blogs/component-instances.png"
+  alt="component-blueprint image"
+  width="320"
+  height="320"
+/>
+</RowHorizontal>
+
+Basically when you write JSX, it gets transpiled to plain old js by Babel or other compiler. It invokes the React.createElement() function which bunch of parameteres as per your element and the plain old JS object which is also known as `Virtual DOM`.
+
+### References
+
+- [CrossComm, Inc: Understanding React's UI Rendering Process](https://www.youtube.com/watch?v=LY6y3HbDVmg)
