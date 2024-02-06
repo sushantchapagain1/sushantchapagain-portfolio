@@ -64,3 +64,11 @@ body {
     width: 100%;
   }
 }
+
+pre {
+  @apply my-4 rounded-md p-3;
+}
+
+pre [data-line] {
+  @apply p-1;
+}

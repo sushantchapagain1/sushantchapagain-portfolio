@@ -14,15 +14,8 @@ import remarkGfm from 'remark-gfm';
 const computedFields: ComputedFields = {
   slug: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
+    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''), // regex to remove /\
   },
-
-  // we can pass any property name here with some calculations.
-  // slugAsParam: {
-  //   type: 'string',
-  //   resolve: (doc) =>
-  //     `/${doc._raw.flattenedPath.split('/').slice(1).join('/')}`,
-  // },
 };
 
 export const Blog = defineDocumentType(() => ({
@@ -43,6 +36,7 @@ export default makeSource({
   contentDirPath: 'content/',
   documentTypes: [Blog],
   mdx: {
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
       [
@@ -58,8 +52,8 @@ export default makeSource({
           onVisitHighlightedLine(node: LineElement) {
             node.properties.className?.push('line--highlighted');
           },
-          onVisitHighlightedWord(node: CharsElement) {
-            node.properties.className = ['word--highlighted'];
+          onVisitHighlightedChars(node: CharsElement) {
+            node.properties.className = ['char--highlighted'];
           },
         },
         [
@@ -73,6 +67,5 @@ export default makeSource({
         ],
       ],
     ],
-    remarkPlugins: [remarkGfm],
   },
 });

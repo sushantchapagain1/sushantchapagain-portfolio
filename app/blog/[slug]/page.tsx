@@ -57,9 +57,9 @@ async function page({ params }: Params) {
   if (!blog) return <NotFound />;
 
   return (
-    <article className="my-12 text-foregroundText">
+    <article className="my-12">
       <div className="mb-9 rounded-md bg-cardBackground p-3">
-        <h1 className="text-lg font-medium sm:text-xl md:text-2xl">
+        <h1 className="text-balance text-lg font-medium text-foregroundText sm:text-xl md:text-2xl">
           {blog.title}
         </h1>
         <span className="text-sm text-lightText">

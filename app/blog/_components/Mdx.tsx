@@ -3,26 +3,20 @@ import { useMDXComponent } from 'next-contentlayer/hooks';
 import Image from 'next/image';
 
 function ImageMdx(props: { alt: string; src: string }) {
-  return <Image {...props} alt={props.alt} className="rounded-md" />;
-}
-
-function RowHorizontal({ children }: { children: React.ReactNode }) {
-  return <div className="mt-3 flex gap-9">{children}</div>;
+  return <Image {...props} alt={props.alt} className="my-3 rounded-md" />;
 }
 
 const components = {
-  // All components that we pass only can be used in mdx
   Image: ImageMdx,
-  RowHorizontal,
 };
 
 function Mdx({ code }: { code: string }) {
   const MdxComponent = useMDXComponent(code);
 
   return (
-    <Fragment>
+    <div className="text-foregroundText">
       <MdxComponent components={components} />
-    </Fragment>
+    </div>
   );
 }
 
