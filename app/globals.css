@@ -16,6 +16,7 @@
   --navigationBg: rgba(255, 255, 255, 0.97);
   --blogCardBg: #6866b00f;
   --blogCardDarkBg: rgba(119, 116, 200, 0.071);
+  --prose-code-bg: rgb(245 245 245/1);
 }
 .dark {
   --foreground-text: rgb(243, 243, 243);
@@ -27,6 +28,7 @@
   --navigationBg: rgba(0, 0, 0, 0.97);
   --blogCardBg: rgba(49, 46, 129, 0.141);
   --blogCardDarkBg: rgba(128, 125, 205, 0.114);
+  --prose-code-bg: rgba(51, 51, 51, 0.659);
 }
 
 body {
@@ -35,27 +37,13 @@ body {
   background-color: var(--app-bg);
 }
 
-/* doint it here cz -webkit-text-stroke property is not available in tailwind */
 .stroke-name {
+  @apply relative after:absolute after:left-0 after:top-0 after:w-0 
+  after:animate-[nameAnimate_1.8s_linear_both] after:overflow-hidden
+   after:whitespace-nowrap after:text-[color:var(--foreground-text)] 
+   after:content-["I'm_Sushant_Chapagain"];
   -webkit-text-stroke: 1px var(--foreground-text);
-  position: relative;
 }
-
-.stroke-name::after {
-  content: "I'm Sushant Chapagain";
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: var(--foreground-text);
-  width: 0;
-  overflow: hidden;
-}
-
-.stroke-name::after {
-  white-space: nowrap;
-  animation: nameAnimate 1.8s linear both;
-}
-
 @keyframes nameAnimate {
   0% {
     width: 0;
@@ -65,10 +53,22 @@ body {
   }
 }
 
+/* rehype pretty code styling */
 pre {
   @apply my-4 rounded-md p-3;
 }
 
 pre [data-line] {
   @apply p-1;
+}
+
+/* Tailwind typography styling */
+.prose,
+.prose a,
+.prose h3 {
+  @apply !text-foregroundText;
+}
+
+.prose code {
+  @apply rounded-lg bg-[--prose-code-bg] p-1 text-inherit;
 }

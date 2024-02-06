@@ -14,9 +14,9 @@ function Mdx({ code }: { code: string }) {
   const MdxComponent = useMDXComponent(code);
 
   return (
-    <div className="text-foregroundText">
+    <Fragment>
       <MdxComponent components={components} />
-    </div>
+    </Fragment>
   );
 }
 

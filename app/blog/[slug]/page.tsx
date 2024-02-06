@@ -57,14 +57,12 @@ async function page({ params }: Params) {
   if (!blog) return <NotFound />;
 
   return (
-    <article className="my-12">
-      <div className="mb-9 rounded-md bg-cardBackground p-3">
+    <article className="prose my-12 max-w-none">
+      <div className="rounded-md bg-cardBackground p-3">
         <h1 className="text-balance text-lg font-medium text-foregroundText sm:text-xl md:text-2xl">
           {blog.title}
         </h1>
-        <span className="text-sm text-lightText">
-          {blog.minuteRead} min read
-        </span>
+        <span className="text-sm">{blog.minuteRead} min read</span>
       </div>
       <Mdx code={blog.body.code} />
     </article>

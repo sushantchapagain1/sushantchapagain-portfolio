@@ -56,15 +56,15 @@ export default makeSource({
             node.properties.className = ['char--highlighted'];
           },
         },
-        [
-          rehypeAutolinkHeadings,
-          {
-            properties: {
-              className: ['subheading-anchor'],
-              ariaLabel: 'Link to section',
-            },
+      ],
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ['subheading-anchor'],
+            ariaLabel: 'Link to sub heading',
           },
-        ],
+        },
       ],
     ],
   },
