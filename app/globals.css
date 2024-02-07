@@ -16,7 +16,7 @@
   --navigationBg: rgba(255, 255, 255, 0.97);
   --blogCardBg: #6866b00f;
   --blogCardDarkBg: rgba(119, 116, 200, 0.071);
-  --prose-code-bg: rgb(245 245 245/1);
+  --prose-code-bg: rgba(231, 231, 231, 0.7);
 }
 .dark {
   --foreground-text: rgb(243, 243, 243);
@@ -55,11 +55,15 @@ body {
 
 /* rehype pretty code styling */
 pre {
-  @apply my-4 rounded-md p-3;
+  @apply rounded-md;
+}
+
+.prose pre {
+  @apply border border-neutral-700 bg-inherit p-0;
 }
 
 pre [data-line] {
-  @apply p-1;
+  @apply px-1;
 }
 
 /* Tailwind typography styling */

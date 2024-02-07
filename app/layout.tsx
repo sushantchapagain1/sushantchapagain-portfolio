@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import Head from './head';
 import { siteMetadata } from '@/data/metadata';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import React from 'react';
 
 const inter = Inter({
   subsets: ['latin'],

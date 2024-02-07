@@ -43,7 +43,9 @@ export default makeSource({
         //@ts-expect-error
         rehypePrettyCode,
         {
-          theme: 'github-dark',
+          theme: 'material-theme-darker',
+          keepBackground: false,
+
           onVisitLine(node: LineElement) {
             if (node.children.length === 0) {
               node.children = [{ type: 'text', value: ' ' }];

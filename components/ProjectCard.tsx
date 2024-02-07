@@ -39,8 +39,8 @@ function ProjectCard({
             {isHosted && (
               <a href={demoUrl ?? ''} target="_blank">
                 <WebsiteIcon
-                  height={22}
-                  width={22}
+                  height={20}
+                  width={20}
                   className="fill-foregroundText"
                   color="text-foregroundText"
                 />

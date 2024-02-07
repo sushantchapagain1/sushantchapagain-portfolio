@@ -7,8 +7,8 @@ type: Blog
 ---
 
 Let's start with the basics by understanding what a component is and how it works.
-A component is like a blueprint or template of a UI that returns a React element in the element tree, usually written in JSX.
-From this blueprint or template, we can create one or multiple component instances when we use the component.
+A component is like a blueprint or template of a UI that returns a React element in the element tree, it is usually written in JSX.
+From this blueprint or template, we can create one or multiple `component instances` when we use the component.
 Each component instance has its own state, props, and lifecycle methods mount, update/rerender, and unmount (more about this later).
 
 <Image
@@ -17,6 +17,23 @@ Each component instance has its own state, props, and lifecycle methods mount, u
   width="650"
   height="620"
 />
+
+When using a component technically its a component instance each component instance will return a `react element`.Component is usually
+written in JSX however JSX in transplied to vanilla js with the `React.createElement` function calls by the transpilers like [babel](https://babeljs.io/docs/#jsx-and-react) or other transpilers.
+So using component will return a react element that element is a imutable javscript object with necessary properties that react keeps in memory
+to create DOM elements for the current component instance.
+
+<Image
+  src="/static/blogs/component-to-dom-elements-chart.png"
+  alt="component-blueprint image"
+  width="750"
+  height="620"
+/>
+
+The `$$typeof` property in react element is used by react to prevent from cross site scripting attacks. notice
+that the value of the property is `Symbol` which is a primitive data type in js which cannot be transmitted via JSON.
+That means these symbol cannot come from any API call.So if a hacker send the fake component from any api react will not see the typeof:Symbol property and
+not add that fake react element to the DOM.
 
 ### References
 
