@@ -9,9 +9,6 @@ export const siteMetadata = {
     'I am a full stack devloper who can develop web application,mobile application with beautiful UIs and secured server.',
   keywords: [
     'Sushant Chapagain',
-    'Chapagain Sushant',
-    'Sushant',
-    'Chapagain',
     'full stack developer',
     'javascript developer',
     'react developer',
