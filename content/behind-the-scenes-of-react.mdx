@@ -9,7 +9,7 @@ type: Blog
 Let's start with the basics by understanding what a component is and how it works.
 A component is like a blueprint or template of a UI that returns a React element in the element tree, it is usually written in JSX.
 From this blueprint or template, we can create one or multiple `component instances` when we use the component.
-Each component instance has its own state, props, and lifecycle methods mount, update/rerender, and unmount (more about this later).
+Each component instance has its own state, props, and lifecycle methods mount, update/re-render, and unmount (more about this later).
 
 <Image
   src="/static/blogs/component-overview.png"
@@ -34,6 +34,28 @@ The `$$typeof` property in react element is used by react to prevent from cross 
 that the value of the property is `Symbol` which is a primitive data type in js which cannot be transmitted via JSON.
 That means these symbol cannot come from any API call.So if a hacker send the fake component from any api react will not see the typeof:Symbol property and
 not add that fake react element to the DOM.
+
+Let's now discuss the subject I mentioned in the component flowchart figure. Basically we will learn steps of how react renders the ui.
+Just keep in mind that rendering term doesnot mean its updating the DOM directly or produces any visual changes instead there are some
+important process invloved in rendering.
+
+### 1. Render triggered
+
+Rendering process is started by react when a render is triggered mostly on the initial render and state update in any component instances also called re-render.
+
+### 2. Render Phase
+
+In this process react calls the component functions and figures out how DOM should be updated to reflect the state changes however it doesnot update the
+dom in this phase, it happens internally it does not produces any visual changes.
+
+### 3. Commit Phase
+
+In this phase react writes the DOM to insert ,update or delete some elements in order to correct the state with the application.
+
+### 4. Browser Paint
+
+In this phase the browser will notice that the DOM has been updated so it repaints the screen, this phase has nothing to do with react
+but this final step that users see the changes in the browser.
 
 ### References
 
