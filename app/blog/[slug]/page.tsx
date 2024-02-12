@@ -6,6 +6,7 @@ import NotFound from '@/app/not-found';
 import { siteMetadata } from '@/data/metadata';
 
 import Mdx from '../_components/Mdx';
+import { formatDate } from '@/lib/utils';
 
 type Params = {
   params: {
@@ -62,7 +63,7 @@ async function page({ params }: Params) {
         <h1 className="text-balance text-lg font-medium text-foregroundText sm:text-xl md:text-2xl">
           {blog.title}
         </h1>
-        <span className="text-sm">{blog.publishedAt}</span>
+        <span className="text-sm">{formatDate(blog.publishedAt)}</span>
       </div>
       <Mdx code={blog.body.code} />
     </article>
