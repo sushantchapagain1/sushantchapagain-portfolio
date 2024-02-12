@@ -25,7 +25,7 @@ function Main() {
           If you would like to collab, you can send me a
           <a
             href="mailto:sreddevil12@gmail.com"
-            className="border-forgroundText mx-2 border-b pb-1 font-medium"
+            className="mx-2 border-b-[1px] border-foregroundText pb-1 font-medium"
           >
             mail
           </a>
@@ -43,7 +43,7 @@ function Main() {
           <a
             href="https://docs.google.com/document/d/1NV0piV6K0yEAlNC7ASaBfMGQ0L7Qdfmu7JghaOdNe04/edit#heading=h.icq2uxfcutbb"
             target="_blank"
-            className="border-b border-foregroundText py-2"
+            className="border-b-[1px] border-foregroundText py-2 font-medium"
           >
             View Resume
           </a>

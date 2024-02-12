@@ -45,7 +45,7 @@ function Navlinks() {
                 key={link.href}
                 className={cn(
                   'p-1 font-light text-lightText transition hover:text-navlinks',
-                  isActive && 'border-b border-lightText text-navlinks',
+                  isActive && 'border-b-[1px] border-lightText text-navlinks',
                 )}
                 onClick={closeMenu}
               >

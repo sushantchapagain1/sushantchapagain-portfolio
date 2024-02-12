@@ -62,10 +62,16 @@ _Virtual Dom is cheap and fast to create multiple trees even if the component tr
 
 Updating a state in a parent component causes all of its children to be re-render even if children's state or props are not change.
 So again when a state changes in somewhere in application it will create a new virtual dom which is cheap and fast however writing to the DOM
-is not cheap and fast.
+is not cheap and fast. For example in a large complex app a state changed somewhere it would be extremly unoptimized and wastefull to write to the DOM from scratch,
+only a small portion of the DOM should be updated the rest should be resued except for inital render.
+And thats what react exactly what react will do with the process called `Reconcilation`.
 
-Reconcilation : when a state changes in a app only small part of the DOM needs to be updated, rest can be resued existing DOM from the existing DOM or from initial render.
-Imagine in a big complex app when you need to update only small part of the DOM only and need to write to DOM again it would be un.
+Reconcilation is a process of deciding which DOM elements needs to be inserted, updated, and deleted with a latest state changes with help of
+reconciler(fiber) and the `diffing` algorithm. Now lets cover the process after Virtual DOM is created, On the inital render of the application,
+based on that virtual Dom fiber creates another tree which is called `Fiber tree`.It is special internal tree where for each component instance and Dom element
+there is one fiber. unlike virtual dom fiber tree is not re created on every render, it is never destroyed because it is mutable data structure which gets mutated on every
+render. remember i said each component instance hold its own state props but internally fiber is the one that takes care of it since there is each fiber for each component
+instance props, state, side effects, hooks all live here.
 
 ### 3. Commit Phase
 
