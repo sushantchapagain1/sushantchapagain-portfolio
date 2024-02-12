@@ -7,7 +7,7 @@ type: Blog
 
 Let's start with the basics by understanding what a component is and how it works.
 A component is like a blueprint or template of a UI that returns a React element in the element tree, it is usually written in JSX.
-From component, we can create one or multiple `component instances` when we use the component.
+From blueprint, we can create one or multiple `component instances` when we use the component.
 Each component instance has its own state, props, and lifecycle methods mount, update/re-render, and unmount.
 
 <Image
@@ -22,7 +22,7 @@ written in JSX however JSX in transplied to vanilla js with the `React.createEle
 So using component will return a react element that element is a imutable javscript object with necessary properties that react keeps in memory
 to create DOM elements for the current component instance.
 
-_The term Virtual Dom is not used by React official docs anymore rather they say react tree. But i will use the term Virtual DOM because
+_The term Virtual Dom is not used by react official docs anymore rather they say react tree. But i will use the term Virtual DOM because
 there will be so many tree in react and it might confuse some of you._ 😁
 
 <Image
@@ -32,10 +32,10 @@ there will be so many tree in react and it might confuse some of you._ 😁
   height="620"
 />
 
-_Note: The `$$typeof` property in react element is used by react to prevent from cross site scripting attacks. notice
-that the value of the property is `Symbol` which is a primitive data type in js which cannot be transmitted via JSON.
-That means these symbol cannot come from any API call.So if a hacker send the fake component from any api react will not see the typeof:Symbol property and
-not add that fake react element to the DOM._
+> 💡 The `$$typeof` property in react element is used by react to prevent from cross site scripting attacks. notice
+> that the value of the property is `Symbol` which is a primitive data type in js which cannot be transmitted via JSON.
+> That means these symbol cannot come from any API call.So if a hacker send the fake component from any api react will not
+> see the typeof:Symbol property and not add that fake react element to the DOM.
 
 Let's now discuss the subject I mentioned in the component flowchart figure. Basically we will learn steps of how react renders the ui.
 Just keep in mind that rendering term doesnot mean its updating the real DOM directly or produces any visual changes instead there are some
@@ -105,7 +105,59 @@ but this final step that users see the changes in the browser.If you want to kno
   height="620"
 />
 
+### Diffing
+
+I mentioned about diffing algorithm in the reconcilation process but did not talked much about it. diffing algorithm is part of reconcilation process.
+Of course diffing algorithm is very complex so i will just discuss the basics like what is diffing algorithm and how it works.
+Diffing is comparing between elements step by step between two renders based on their position in the react tree. Diffing algorithm uses two basic
+assumptions:
+
+### 1. Two element of different element type will produce different tree
+
+When changing the header to div the element type is changed so it will distroy the tree from
+the parent component, rebuild with the new parent header from div in this example
+and also its state will be reset.
+
+```js {1-3,4}
+<div>
+  <div>
+    <SearchBar />
+  </div>
+  <main>lorem</main>
+</div>
+
+
+<div>
+  <header>
+   <SearchBar />
+  </header>
+  <UserProfile/>
+</div>
+```
+
+There are many senarios where same position and same element will be present in the tree those elements will
+not be destroyed nor their state.
+
+```js {1-3,4}
+<div>
+  <header className="hidden">
+   <SearchBar />
+  </header>
+  <UserProfile/>
+</div>
+
+<div>
+  <header className="active">
+   <SearchBar />
+  </header>
+  <UserProfile/>
+</div>
+```
+
+### 2. Element with stable key prop stays the same in every render
+
 ### References
 
 - [Render and commit react docs](https://react.dev/learn/render-and-commit)
 - [CrossComm, Inc: Understanding React's UI Rendering Process](https://www.youtube.com/watch?v=LY6y3HbDVmg)
+- [Diagram Drawing tool](https://draw.io/)

@@ -14,7 +14,7 @@ import remarkGfm from 'remark-gfm';
 const computedFields: ComputedFields = {
   slug: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''), // regex to remove /\
+    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''), // regex to remove backslash and frontslash
   },
 };
 

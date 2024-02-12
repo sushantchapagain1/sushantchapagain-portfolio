@@ -16,7 +16,7 @@
   --navigationBg: rgba(255, 255, 255, 0.97);
   --blogCardBg: #6866b00f;
   --blogCardDarkBg: rgba(119, 116, 200, 0.071);
-  --prose-code-bg: rgba(231, 231, 231, 0.7);
+  --prose-code-bg: rgb(27, 25, 25);
 }
 .dark {
   --foreground-text: rgb(243, 243, 243);
@@ -73,8 +73,12 @@ pre [data-line] {
   @apply !text-foregroundText;
 }
 
+.prose blockquote {
+  @apply !text-lightText;
+}
+
 .prose code {
-  @apply rounded-lg bg-[--prose-code-bg] p-1 text-inherit;
+  @apply rounded bg-[--prose-code-bg] p-1 text-inherit;
 }
 
 .prose a {
