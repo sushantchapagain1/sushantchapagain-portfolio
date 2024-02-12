@@ -8,8 +8,8 @@ type: Blog
 
 Let's start with the basics by understanding what a component is and how it works.
 A component is like a blueprint or template of a UI that returns a React element in the element tree, it is usually written in JSX.
-From this blueprint or template, we can create one or multiple `component instances` when we use the component.
-Each component instance has its own state, props, and lifecycle methods mount, update/re-render, and unmount (more about this later).
+From component, we can create one or multiple `component instances` when we use the component.
+Each component instance has its own state, props, and lifecycle methods mount, update/re-render, and unmount.
 
 <Image
   src="/static/blogs/component-overview.png"
@@ -25,28 +25,47 @@ to create DOM elements for the current component instance.
 
 <Image
   src="/static/blogs/component-to-dom-elements-chart.png"
-  alt="component-blueprint image"
+  alt="component to dom elements image"
   width="750"
   height="620"
 />
 
-The `$$typeof` property in react element is used by react to prevent from cross site scripting attacks. notice
+_The `$$typeof` property in react element is used by react to prevent from cross site scripting attacks. notice
 that the value of the property is `Symbol` which is a primitive data type in js which cannot be transmitted via JSON.
 That means these symbol cannot come from any API call.So if a hacker send the fake component from any api react will not see the typeof:Symbol property and
-not add that fake react element to the DOM.
+not add that fake react element to the DOM._
 
 Let's now discuss the subject I mentioned in the component flowchart figure. Basically we will learn steps of how react renders the ui.
-Just keep in mind that rendering term doesnot mean its updating the DOM directly or produces any visual changes instead there are some
-important process invloved in rendering.
+Just keep in mind that rendering term doesnot mean its updating the real DOM directly or produces any visual changes instead there are some
+important process invloved while rendering.
 
 ### 1. Render triggered
 
 Rendering process is started by react when a render is triggered mostly on the initial render and state update in any component instances also called re-render.
+Render triggred is for entire applications but does not update the dom for all.
 
 ### 2. Render Phase
 
 In this process react calls the component functions and figures out how DOM should be updated to reflect the state changes however it doesnot update the
-dom in this phase, it happens internally it does not produces any visual changes.
+real dom in this phase, it happens internally it does not produces any visual changes. In the beginning react goes through the entire component tree take all the
+component instances that causes render and this will create updated react elements and all together it will create a js object also called `Virtual DOM`.
+Virtual Dom is a tree of all react element created from all the instances from the component tree.
+
+_Virtual Dom is cheap and fast to create multiple trees even if the component tree is very huge._
+
+<Image
+  src="/static/blogs/ui-tree-to-virtual-dom.png"
+  alt="Ui tree to virtual dom image"
+  width="750"
+  height="620"
+/>
+
+Updating a state in a parent component causes all of its children to be re-render even if children's state or props are not change.
+So again when a state changes in somewhere in application it will create a new virtual dom which is cheap and fast however writing to the DOM
+is not cheap and fast.
+
+Reconcilation : when a state changes in a app only small part of the DOM needs to be updated, rest can be resued existing DOM from the existing DOM or from initial render.
+Imagine in a big complex app when you need to update only small part of the DOM only and need to write to DOM again it would be un.
 
 ### 3. Commit Phase
 
@@ -59,4 +78,5 @@ but this final step that users see the changes in the browser.
 
 ### References
 
+- [Render and commit react docs](https://react.dev/learn/render-and-commit)
 - [CrossComm, Inc: Understanding React's UI Rendering Process](https://www.youtube.com/watch?v=LY6y3HbDVmg)
