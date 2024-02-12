@@ -62,7 +62,7 @@ async function page({ params }: Params) {
         <h1 className="text-balance text-lg font-medium text-foregroundText sm:text-xl md:text-2xl">
           {blog.title}
         </h1>
-        <span className="text-sm">{blog.minuteRead} min read</span>
+        <span className="text-sm">{blog.publishedAt}</span>
       </div>
       <Mdx code={blog.body.code} />
     </article>

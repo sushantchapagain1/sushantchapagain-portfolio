@@ -1,6 +1,5 @@
 ---
 title: 'Behind the scenes of how react works.'
-minuteRead: 10
 description: 'Simple explanation of how React works behind the scenes and some important concepts to know in React'
 publishedAt: '2024-01-28'
 type: Blog
@@ -23,6 +22,9 @@ written in JSX however JSX in transplied to vanilla js with the `React.createEle
 So using component will return a react element that element is a imutable javscript object with necessary properties that react keeps in memory
 to create DOM elements for the current component instance.
 
+_The term Virtual Dom is not used by React official docs anymore rather they say react tree. But i will use the term Virtual DOM because
+there will be so many tree in react and it might confuse some of you._ 😁
+
 <Image
   src="/static/blogs/component-to-dom-elements-chart.png"
   alt="component to dom elements image"
@@ -30,7 +32,7 @@ to create DOM elements for the current component instance.
   height="620"
 />
 
-_The `$$typeof` property in react element is used by react to prevent from cross site scripting attacks. notice
+_Note: The `$$typeof` property in react element is used by react to prevent from cross site scripting attacks. notice
 that the value of the property is `Symbol` which is a primitive data type in js which cannot be transmitted via JSON.
 That means these symbol cannot come from any API call.So if a hacker send the fake component from any api react will not see the typeof:Symbol property and
 not add that fake react element to the DOM._
@@ -67,20 +69,41 @@ only a small portion of the DOM should be updated the rest should be resued exce
 And thats what react exactly what react will do with the process called `Reconcilation`.
 
 Reconcilation is a process of deciding which DOM elements needs to be inserted, updated, and deleted with a latest state changes with help of
-reconciler(fiber) and the `diffing` algorithm. Now lets cover the process after Virtual DOM is created, On the inital render of the application,
-based on that virtual Dom fiber creates another tree which is called `Fiber tree`.It is special internal tree where for each component instance and Dom element
+fiber(React v16+) and the `diffing` algorithm. Now lets cover the process after Virtual DOM is created, On the inital render of the application,
+based on that virtual dom, fiber creates another tree which is called `Fiber tree`.It is special internal tree where for each component instance and Dom element
 there is one fiber. unlike virtual dom fiber tree is not re created on every render, it is never destroyed because it is mutable data structure which gets mutated on every
-render. remember i said each component instance hold its own state props but internally fiber is the one that takes care of it since there is each fiber for each component
-instance props, state, side effects, hooks all live here.
+render. i said each component instance hold its own state props at beginning but internally fiber is the one that takes care of it since there is each fiber for each component
+instance has its props, state, side effects, hooks and work queue.
+
+<Image
+  src="/static/blogs/virtual-dom-to-fiber-tree.png"
+  alt="virtual dom to fiber tree"
+  width="750"
+  height="620"
+/>
 
 ### 3. Commit Phase
 
-In this phase react writes the DOM to insert ,update or delete some elements in order to correct the state with the application.
+In this phase react writes the DOM to insert ,update or delete some elements in order to keep sync the state with the application
+by sending the list of dom updates to do in the current fiber tree.
+
+Before the commit phase react library was handling the rendering process but commit phase is handle by `react dom`. React itself does not touch the DOM nor Native Platfrom (iOS and andriod).
+React does even know where the result of render phase will be committed and painted, only render phase is handled by react because it was designed to be used independently for multiple platform.
+Meaning react can be used to develop web applications using react dom, similarly react native to develop iOS and andriod applications with the Native components like View, Image, Pressable, etc .
+and even videos using [Remotion](https://www.remotion.dev/).
 
 ### 4. Browser Paint
 
 In this phase the browser will notice that the DOM has been updated so it repaints the screen, this phase has nothing to do with react
-but this final step that users see the changes in the browser.
+but this final step that users see the changes in the browser.If you want to know more about how this is handled by browsers, you can
+[click](https://web.dev/articles/critical-rendering-path/render-tree-construction) here.
+
+<Image
+  src="/static/blogs/render-phase-to-paint.png"
+  alt="virtual dom to fiber tree"
+  width="750"
+  height="620"
+/>
 
 ### References
 

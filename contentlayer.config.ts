@@ -25,7 +25,6 @@ export const Blog = defineDocumentType(() => ({
   fields: {
     title: { type: 'string', required: true },
     publishedAt: { type: 'date', required: true },
-    minuteRead: { type: 'number', required: true },
     image: { type: 'string', required: false },
     description: { type: 'string', required: true },
   },

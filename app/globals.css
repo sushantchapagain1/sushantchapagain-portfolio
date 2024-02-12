@@ -76,3 +76,7 @@ pre [data-line] {
 .prose code {
   @apply rounded-lg bg-[--prose-code-bg] p-1 text-inherit;
 }
+
+.prose a {
+  @apply border-b pb-1 no-underline;
+}
