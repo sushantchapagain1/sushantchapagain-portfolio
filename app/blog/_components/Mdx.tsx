@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
-import { useMDXComponent } from 'next-contentlayer/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMDXComponent } from 'next-contentlayer/hooks';
+import Share from './Share';
 
 function CustomImage(props: { alt: string; src: string }) {
   return (
@@ -34,6 +35,7 @@ function Mdx({ code }: { code: string }) {
     <Fragment>
       {/* @ts-expect-error */}
       <MdxComponent components={components} />
+      <Share />
     </Fragment>
   );
 }
