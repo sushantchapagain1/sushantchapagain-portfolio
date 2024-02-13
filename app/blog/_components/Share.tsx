@@ -16,10 +16,10 @@ function Share() {
         <LinkedinShareButton url="https://www.linkedin.com/feed/">
           <LinkedinIcon size={30} round />
         </LinkedinShareButton>
-        <TwitterShareButton url="https://www.linkedin.com/feed/">
+        <TwitterShareButton url="https://twitter.com/home">
           <TwitterIcon size={30} round />
         </TwitterShareButton>
-        <FacebookShareButton url="https://www.linkedin.com/feed/">
+        <FacebookShareButton url="https://www.facebook.com/">
           <FacebookIcon size={30} round />
         </FacebookShareButton>
       </div>
