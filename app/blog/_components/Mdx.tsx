@@ -3,7 +3,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function ImageMdx(props: { alt: string; src: string }) {
+function CustomImage(props: { alt: string; src: string }) {
   return (
     <Image
       {...props}
@@ -13,7 +13,7 @@ function ImageMdx(props: { alt: string; src: string }) {
   );
 }
 
-function LinkMdx(props: { href: string; children: React.ReactNode }) {
+function CustomLink(props: { href: string; children: React.ReactNode }) {
   const href = props.href;
 
   if (href.startsWith('#')) {
@@ -23,8 +23,8 @@ function LinkMdx(props: { href: string; children: React.ReactNode }) {
 }
 
 const components = {
-  Image: ImageMdx,
-  a: LinkMdx,
+  Image: CustomImage,
+  a: CustomLink,
 };
 
 function Mdx({ code }: { code: string }) {
@@ -32,6 +32,7 @@ function Mdx({ code }: { code: string }) {
 
   return (
     <Fragment>
+      {/* @ts-expect-error */}
       <MdxComponent components={components} />
     </Fragment>
   );

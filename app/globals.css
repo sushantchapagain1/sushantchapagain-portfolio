@@ -16,7 +16,8 @@
   --navigationBg: rgba(255, 255, 255, 0.97);
   --blogCardBg: #6866b00f;
   --blogCardDarkBg: rgba(119, 116, 200, 0.071);
-  --prose-code-bg: rgb(27, 25, 25);
+  --prose-code-bg: rgba(53, 53, 53, 0.092);
+  --prose-figure-bg: rgba(53, 53, 53, 0.092);
 }
 .dark {
   --foreground-text: rgb(243, 243, 243);
@@ -29,6 +30,7 @@
   --blogCardBg: rgba(49, 46, 129, 0.141);
   --blogCardDarkBg: rgba(128, 125, 205, 0.114);
   --prose-code-bg: rgba(51, 51, 51, 0.659);
+  --prose-figure-bg: rgba(53, 53, 53, 0.092);
 }
 
 body {
@@ -59,7 +61,7 @@ pre {
 }
 
 .prose pre {
-  @apply border border-neutral-700 bg-inherit p-0;
+  @apply border border-neutral-700 p-0;
 }
 
 pre [data-line] {
@@ -73,12 +75,16 @@ pre [data-line] {
   @apply !text-foregroundText;
 }
 
+.prose code {
+  @apply rounded bg-[var(--prose-code-bg)] p-1 text-inherit;
+}
+
 .prose blockquote {
   @apply !text-lightText;
 }
 
-.prose code {
-  @apply rounded bg-[--prose-code-bg] p-1 text-inherit;
+.prose figure code {
+  @apply rounded bg-[var(--prose-figure-bg)] p-1 text-inherit;
 }
 
 .prose a {
