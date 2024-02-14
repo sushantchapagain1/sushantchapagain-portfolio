@@ -118,7 +118,7 @@ When changing the div to header the element type is changed so it will distroy t
 the parent component, rebuild with the new parent header from div in this example
 and also its state will be reset.
 
-```js {1-3,4}
+```js
 <>
   <div>
     <SearchBar />
@@ -138,7 +138,7 @@ and also its state will be reset.
 There are many senarios where same position and same element will be present in the element tree those elements will
 not be destroyed nor their state. meaning the component's state will be preserved.
 
-```js {1-3,4}
+```js
 <>
   <header className="hidden">
    <SearchBar />
@@ -170,7 +170,7 @@ behaviour in our application for examples mapping a list and displaying a compon
 
 Let's see clearly with a code example:
 
-```js {1-3,4}
+```js
 {
   activeTab <= 1 ? (
     <TabContent item={content.at(activeTab)} />
@@ -193,7 +193,7 @@ reset the state in another TabContent. These types of situation will come when w
 
 So to solve that issue the `key` prop comes.
 
-```js {1-3,4}
+```js
 {
   activeTab <= 1 ? (
     // added key prop

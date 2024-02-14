@@ -84,7 +84,7 @@ pre [data-line] {
 }
 
 .prose figure code {
-  @apply !rounded !bg-[var(--prose-figure-bg)] p-3 text-inherit;
+  @apply !text-wrap !rounded !bg-[var(--prose-figure-bg)] !p-3 text-inherit;
 }
 
 .prose a {

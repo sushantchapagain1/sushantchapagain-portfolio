@@ -1,8 +1,69 @@
 ---
 title: 'Write clean code in redux.'
 description: 'To write clean and maintainable Redux code, I follow these best practices and principles'
-publishedAt: '2024-01-28'
+publishedAt: '2023-02-05'
 type: Blog
 ---
 
-Ullamco et nostrud magna commodo nostrud ...
+Redux is a very popular package to handle global state in the application . The beauty of redux is that we can use in
+
+```js
+<>
+  <div>
+    <SearchBar />
+  </div>
+  <main>lorem</main>
+</>
+
+
+<>
+  <header>
+   <SearchBar />
+  </header>
+  <main>lorem</main>
+</>
+```
+
+```js
+<>
+  <header className="hidden">
+   <SearchBar />
+  </header>
+  <UserProfile/>
+</>
+
+<>
+  <header className="active">
+   <SearchBar />
+  </header>
+  <UserProfile/>
+</>
+```
+
+```js
+{
+  activeTab <= 1 ? (
+    <TabContent item={content.at(activeTab)} />
+  ) : (
+    <DifferentElementType />
+  );
+}
+```
+
+```js
+{
+  activeTab <= 1 ? (
+    // added key prop
+    <TabContent item={content.at(activeTab)} key={content.at(activeTab).id} />
+  ) : (
+    <DifferentElementType />
+  );
+}
+```
+
+<Image
+  src="/static/blogs/without-key-prop.gif"
+  alt="Without key prop image"
+  width="750"
+  height="620"
+/>
