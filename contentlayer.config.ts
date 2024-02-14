@@ -16,6 +16,10 @@ const computedFields: ComputedFields = {
     type: 'string',
     resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''), // regex to remove backslash and frontslash
   },
+  slugAsParams: {
+    type: 'string',
+    resolve: (doc) => `/blog/${doc._raw.flattenedPath}`,
+  },
 };
 
 export const Blog = defineDocumentType(() => ({

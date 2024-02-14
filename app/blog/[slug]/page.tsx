@@ -1,12 +1,13 @@
 import React from 'react';
 import type { Metadata } from 'next';
-
 import { allBlogs } from '@/.contentlayer/generated';
 import NotFound from '@/app/not-found';
+
 import { siteMetadata } from '@/data/metadata';
+import { formatDate } from '@/lib/utils';
 
 import Mdx from '../_components/Mdx';
-import { formatDate } from '@/lib/utils';
+import Share from '../_components/Share';
 
 type Params = {
   params: {
@@ -66,6 +67,7 @@ async function page({ params }: Params) {
         <span className="text-sm">{formatDate(blog.publishedAt)}</span>
       </div>
       <Mdx code={blog.body.code} />
+      <Share pathName={blog.slugAsParams} />
     </article>
   );
 }
