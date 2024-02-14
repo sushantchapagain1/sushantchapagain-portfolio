@@ -5,65 +5,77 @@ publishedAt: '2023-02-05'
 type: Blog
 ---
 
-Redux is a very popular package to handle global state in the application . The beauty of redux is that we can use in
+Redux is a very popular package to handle `global state` in the application. Redux allows you to manage
+state in a `single place` and keep changes in your app more predictable and traceable, making it easier to understand
+the changes happening in your app. In a small and simple app you do not even need redux you can use context API.
+If your application need state in many places, the app state is updated frequently, the app has a medium or large-sized codebase,
+and might be worked on by many people,then you can use redux. The beauty of redux is that we can use redux in react, react native, angular and vue.
+
+In the past writting redux code was a too much work because of the too much boilerplate code and to the call the dispatch with the type of
+reducer, etc. Thanks to `redux tool kit (RTK)` writting redux code nowadays is way more easier than redux core. So let's start by comparing the
+code we write in redux core vs redux tool kit. We will be discussing the complex topic like case reducer, thunk middleware and more.
+
+### Setup redux without RTK. (Not to do this way)
+
+You do not need to remember this redux core example fully but when we see these in older codebase you need to know whats going on.
+If you want to explore redux core or you are working in a older codebase with redux core you can always [check this out](https://redux.js.org/tutorials/fundamentals/part-1-overview).
 
 ```js
-<>
-  <div>
-    <SearchBar />
-  </div>
-  <main>lorem</main>
-</>
-
-
-<>
-  <header>
-   <SearchBar />
-  </header>
-  <main>lorem</main>
-</>
+//  add the dependencies
+yarn add redux react-redux redux-thunk redux-devtools-extension
 ```
 
 ```js
-<>
-  <header className="hidden">
-   <SearchBar />
-  </header>
-  <UserProfile/>
-</>
+// creating the slice
+export default function cartReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'cart/addItem':
+      return {
+        ...state,
+        cart: action.payload,
+      };
 
-<>
-  <header className="active">
-   <SearchBar />
-  </header>
-  <UserProfile/>
-</>
-```
+    case 'cart/clearCart':
+      return { ...initialState };
 
-```js
-{
-  activeTab <= 1 ? (
-    <TabContent item={content.at(activeTab)} />
-  ) : (
-    <DifferentElementType />
-  );
+    default:
+      return state;
+  }
+}
+
+export function addItem() {
+  return {
+    type: 'cart/addItem',
+    payload: { FAKE_CART },
+  };
 }
 ```
 
 ```js
-{
-  activeTab <= 1 ? (
-    // added key prop
-    <TabContent item={content.at(activeTab)} key={content.at(activeTab).id} />
-  ) : (
-    <DifferentElementType />
-  );
-}
+// create store
+const rootReducer = combineReducers({
+  cart: cartReducer,
+});
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk)),
+);
 ```
 
-<Image
-  src="/static/blogs/without-key-prop.gif"
-  alt="Without key prop image"
-  width="750"
-  height="620"
-/>
+Problem that many developers used to face using redux core:
+
+- too many dependencies to install.
+- complicated to configure store.
+- complex to create slice need to have deep understand of useReducer hook of react, creating slice and reducer used to be big problem for me because of action type and when i need to some calculation from the current state. 😅.
+- To do asynchronous operations like API call thunk middleware need to be passed.
+
+### Let's handle the application state in go to way
+
+```js
+// 1. Add dependencies to yout project.
+yarn add react-redux @reduxjs/toolkit
+```
+
+The first difference you will see when you use RTK is you do not need to add redux-devtools-extension and redux-thunk. The @reduxjs/toolkit
+package will already include those. @reduxjs/toolkit package is for managing the store, thunk middleware, and devtools. Its like heart of redux.
