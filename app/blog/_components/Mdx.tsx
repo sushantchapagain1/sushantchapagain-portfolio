@@ -19,7 +19,14 @@ function CustomLink(props: { href: string; children: React.ReactNode }) {
   if (href.startsWith('#')) {
     return <Link {...props}>{props.children}</Link>;
   }
-  return <a target="_blank" rel="noopener noreferrer" {...props} />;
+  return (
+    <a
+      target="_blank"
+      className="border-b border-foregroundText"
+      rel="noopener noreferrer"
+      {...props}
+    />
+  );
 }
 
 const components = {
