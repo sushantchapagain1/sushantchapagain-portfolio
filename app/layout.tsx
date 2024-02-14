@@ -6,7 +6,6 @@ import Footer from '@/components/Footer';
 import Head from './head';
 import { siteMetadata } from '@/data/metadata';
 import { ThemeProvider } from '@/contexts/ThemeContext';
-import React from 'react';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,17 +16,8 @@ export const metadata: Metadata = {
   description: siteMetadata.description,
   keywords: siteMetadata.keywords,
   creator: siteMetadata.creator,
-  openGraph: {
-    title: siteMetadata.title,
-    description: siteMetadata.description,
-    images: [siteMetadata.openGraphImage],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    images: [siteMetadata.openGraphImage],
-  },
+  // need to add metadatabase url to ork opengraph-image in app dir.
+  metadataBase: new URL(siteMetadata.url),
   robots: {
     index: true,
     follow: true,

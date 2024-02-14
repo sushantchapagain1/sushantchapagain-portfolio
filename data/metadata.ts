@@ -16,5 +16,4 @@ export const siteMetadata = {
     'node js developer',
     'react native developer',
   ],
-  openGraphImage: 'app/opengraph-image.png',
 };

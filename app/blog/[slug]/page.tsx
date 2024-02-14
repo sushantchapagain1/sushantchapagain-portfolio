@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { allBlogs } from '@/.contentlayer/generated';
 import NotFound from '@/app/not-found';
 
-import { siteMetadata } from '@/data/metadata';
 import { formatDate } from '@/lib/utils';
 
 import Mdx from '../_components/Mdx';
@@ -26,30 +25,6 @@ export async function generateMetadata({
   return {
     title: blog.title,
     description: blog.description,
-    openGraph: {
-      title: blog.title,
-      description: blog.description,
-      siteName: blog.title,
-      publishedTime: blog.publishedAt,
-      locale: 'en_US',
-      type: 'article',
-      url: './',
-      authors: siteMetadata.creator,
-      images: [
-        {
-          url: '/opengraph-image.png',
-          alt: blog.title,
-          width: 1000,
-          height: 600,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: blog.title,
-      description: blog.description,
-      images: ['/opengraph-image.png'],
-    },
   };
 }
 
