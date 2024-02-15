@@ -84,9 +84,9 @@ pre [data-line] {
 }
 
 .prose figure code {
-  @apply !text-wrap !rounded !bg-[var(--prose-figure-bg)] !p-3 text-center;
-  /* For safari */
-  white-space: normal !important;
+  @apply !text-wrap !rounded !bg-[var(--prose-figure-bg)] !p-3;
+  /* For safari cz text wrap is not supported */
+  white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
