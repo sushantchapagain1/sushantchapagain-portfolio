@@ -85,6 +85,9 @@ pre [data-line] {
 
 .prose figure code {
   @apply !text-wrap !rounded !bg-[var(--prose-figure-bg)] !p-3 text-inherit;
+  /* For safari */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .prose a {
