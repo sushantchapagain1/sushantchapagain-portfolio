@@ -11,7 +11,10 @@ type Props = {
 function BlogCard({ title, description, slug }: Props) {
   return (
     <Link href={`/blog/${slug}`}>
-      <article className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[var(--blogCardBg)] to-[var(--cardBackground)] p-4 shadow-md transition hover:bg-cardBackground">
+      <article
+        className="relative min-h-24 overflow-hidden rounded-xl bg-gradient-to-r from-[var(--blogCardBg)]
+       to-[var(--cardBackground)] p-4 shadow-md transition hover:bg-cardBackground"
+      >
         <h2 className="mb-2 text-lg font-semibold text-foregroundText">
           {title}
         </h2>

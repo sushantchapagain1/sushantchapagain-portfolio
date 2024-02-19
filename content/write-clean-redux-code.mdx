@@ -9,16 +9,16 @@ Redux is a very popular package to handle `global state` in the application. Red
 state in a `single place` and keep changes in your app more predictable and traceable, making it easier to understand
 the changes happening in your app. In a small and simple app you do not even need redux you can use context API.
 If your application need state in many places, the app state is updated frequently, the app has a medium or large-sized codebase,
-and might be worked on by many people,then you can use redux. The beauty of redux is that we can use redux in react, react native, angular and vue.
+and might be worked on by many people,then you can use redux. The beauty of redux is that we can use redux in react, react native and angular.
 
-In the past writting redux code was a too much work because of the too much boilerplate code and to the call the dispatch with the type of
-reducer, etc. Thanks to `redux tool kit (RTK)` writting redux code nowadays is way more easier than redux core. So let's start by comparing the
-code we write in redux core vs redux tool kit. We will be discussing the complex topic like case reducer, thunk middleware and more.
+In the past writting redux code was a too much work because of the too much boilerplate code. Thanks to `redux tool kit (RTK)` writting redux code
+nowadays is way more easier than redux core. So let's start by comparing thecode we write in redux core vs redux tool kit.
 
 ### Setup redux without RTK. (Not to do this way)
 
 You do not need to remember this redux core example fully but when we see these in older codebase you need to know whats going on.
-If you want to explore redux core or you are working in a older codebase with redux core you can always [check this out](https://redux.js.org/tutorials/fundamentals/part-1-overview).
+If you want to explore redux core more or you are working in a older codebase with redux core you can always
+[check this docs from redux](https://redux.js.org/tutorials/fundamentals/part-1-overview).
 
 ```js
 //  add the dependencies
@@ -26,7 +26,7 @@ yarn add redux react-redux redux-thunk redux-devtools-extension
 ```
 
 ```js
-// creating the slice
+// creating the reducers
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case 'cart/addItem':
@@ -46,7 +46,7 @@ export default function cartReducer(state = initialState, action) {
 export function addItem() {
   return {
     type: 'cart/addItem',
-    payload: { FAKE_CART },
+    payload: {[]},
   };
 }
 ```
@@ -59,23 +59,75 @@ const rootReducer = combineReducers({
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk)),
+  composeWithDevTools(
+    // prettier-ignore
+    applyMiddleware(thunk),
+  ),
 );
 ```
 
 Problem that many developers used to face using redux core:
 
-- too many dependencies to install.
-- complicated to configure store.
-- complex to create slice need to have deep understand of useReducer hook of react, creating slice and reducer used to be big problem for me because of action type and when i need to some calculation from the current state. 😅.
+- Complicated to configure store.
+- Complex to create slice and reducer used to be big problem for me 😅.
 - To do asynchronous operations like API call thunk middleware need to be passed.
 
-### Let's handle the application state in go to way
+```js
+So to solve the problem for the developers redux toolkit was invented. RTK wraps around the core redux package, and contains API methods and common dependencies that we think are essential for building a redux app 😲.
+```
+
+Let's handle the application state in `go to way`. To start now you can either clone or extract templete provided from redux by
+clicking [here](https://redux.js.org/introduction/installation#create-a-react-redux-app) or add in existing project.
+
+### Installing the dependencies
 
 ```js
-// 1. Add dependencies to yout project.
 yarn add react-redux @reduxjs/toolkit
 ```
 
-The first difference you will see when you use RTK is you do not need to add redux-devtools-extension and redux-thunk. The @reduxjs/toolkit
-package will already include those. @reduxjs/toolkit package is for managing the store, thunk middleware, and devtools. Its like heart of redux.
+### Create Slice
+
+`createSlice` is a function where we write the state logic for a single state or a feature from bunch of reducers.
+
+```js
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  cart: [],
+};
+
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState,
+  reducers: {
+    addItem(state, action) {
+      state.cart.push(action.payload);
+    },
+    deleteItem(state, action) {
+      state.cart.filter((cartItem) => cartItem.id !== action.payload);
+    },
+    clearCart(state) {
+      state.cart = [];
+    },
+  },
+});
+
+export const { addItem, deleteItem, clearCart } = cartSlice.actions;
+export default cartSlice.reducer;
+```
+
+createSlice function accepts a configuration object with these following options:
+
+- name:string used in action type as prefix.
+- initialState:object with prop needed in the state.
+- reducers:object with "case reducer" function (functions intended to handle a specific action type, equivalent to a single case statement in a switch).
+
+In redux we used to handle the reducer with a specific action type with a switch case manually. RTK will generate the
+action name and type automatically from the name and method name of the reducer for example:
+
+- addItem reducer function will handle the action type "cart/addItem".
+- deleteItem reducer function will handle the action type "cart/deleteItem".
+- clearItem reducer function will handle the action type "cart/clearItem".
+- Each reducer will have current state and action in the argument.
+
+### Configure Store
