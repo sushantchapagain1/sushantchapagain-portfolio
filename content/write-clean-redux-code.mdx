@@ -90,6 +90,7 @@ yarn add react-redux @reduxjs/toolkit
 `createSlice` is a function where we write the state logic for a single state or a feature from bunch of reducers.
 
 ```js
+// cartSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -131,3 +132,44 @@ action name and type automatically from the name and method name of the reducer 
 - Each reducer will have current state and action in the argument.
 
 ### Configure Store
+
+The standard method for creating a Redux store. It uses the low-level Redux core createStore method internally,
+but wraps that to provide good middleware and redux devtools out of the box
+when we use configureStore method.
+
+```js
+// store.js
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from './features/cart/cartSlice';
+
+const store = configureStore({
+  reducer: {
+    cart: cartReducer,
+  },
+});
+
+export default store;
+```
+
+It basically helps developers experience with doing these tasks automatically:
+
+- Combining the slice reducers into the root reducer.
+- Creating the middleware using redux-thunk as default for side effects(API calls, updating the DOM directly or Timers).
+- Adding the Redux DevTools enhancer, and composing the enhancers together.
+- Calling createStore method.
+
+### Provider
+
+```js
+import App from './App.jsx';
+import { Provider } from 'react-redux';
+import store from './store.js';
+
+<Provider store={store}>
+  <App />
+</Provider>;
+```
+
+Provider the store to the children where we need the store to retrive the data and set the data from there.
+Redux also does the perfomance optimization automatically. You can see the difference of using context and
+redux by using the `Profiler` tab from the [react devtools](https://react.dev/learn/react-developer-tools) not redux devtools.
