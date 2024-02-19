@@ -173,3 +173,44 @@ import store from './store.js';
 Provider the store to the children where we need the store to retrive the data and set the data from there.
 Redux also does the perfomance optimization automatically. You can see the difference of using context and
 redux by using the `Profiler` tab from the [react devtools](https://react.dev/learn/react-developer-tools) not redux devtools.
+
+### Get data from store
+
+`useSelector` hook allows you to extract data from the redux store state for use in this component, using a selector function.
+
+```js
+//cart.jsx
+function Cart() {
+  const cart = useSelector(getCart);
+  // render component with data.
+}
+
+export default Cart;
+
+// cartSlice.js
+// ... existing cartSlice code
+
+export const getCart = (state) => state.cart.cart;
+```
+
+useSelector hook has the state of entire store so we can isolate the getCart in the cartSlice file
+so that if we need the cart state in another component we can directly use that method without repeating
+useSelector((state) => state.cart.cart) in every where we use cart state.
+
+### Create a action in the store
+
+use
+
+```js
+// cart.jsx
+import { useDispatch } from 'react-redux';
+import { clearCart } from './cartSlice';
+
+function Cart() {
+  const dispatch = useDispatch();
+  <div>
+    ...
+    <button onClick={() => dispatch(clearCart())}>Empty cart</button>;
+  </div>;
+}
+```
