@@ -75,6 +75,10 @@ pre [data-line] {
   @apply !text-foregroundText;
 }
 
+.prose {
+  @apply text-sm  md:text-base;
+}
+
 .prose code {
   @apply rounded bg-[var(--prose-code-bg)] p-1 text-inherit;
 }

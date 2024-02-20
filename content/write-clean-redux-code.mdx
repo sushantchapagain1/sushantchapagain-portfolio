@@ -197,9 +197,10 @@ useSelector hook has the state of entire store so we can isolate the getCart in 
 so that if we need the cart state in another component we can directly use that method without repeating
 useSelector((state) => state.cart.cart) in every where we use cart state.
 
-### Create a action in the store
+### Create action in the store
 
-use
+`useDispatch` hook returns a reference to the dispatch function from the Redux store. You may use it to dispatch actions as needed,
+the action that we exported from the slice.
 
 ```js
 // cart.jsx
@@ -214,3 +215,74 @@ function Cart() {
   </div>;
 }
 ```
+
+### API calls
+
+Stop using redux if you are using redux just for data fetching. There are packages like [tanstack query](https://tanstack.com/query/v3/),
+[RTK query](https://redux-toolkit.js.org/rtk-query/overview) for controlled data fetching and caching. However if you are using next js version 14 or later you can just use fetch api that will automatically cache the data and revalidate with some options.
+
+```js
+// example of data fetching, caching and revalidating in next js.
+const res = await fetch('https://...', { next: { tags: ['collection'] } });
+```
+
+Coming back to redux to perform API calls `createAsyncThunk` function is used. this function accepts a redux action type string and a callback function that should always return a promise.
+It generates promise lifecycle action types based on the action type prefix that you pass in, and returns a thunk action creator that will run the promise callback
+and dispatch the lifecycle actions (pending, fulfilled, rejected) based on the returned promise.
+
+```js
+// userSlice.js
+
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { userAPI } from './userAPI';
+
+
+const fetchUserById = createAsyncThunk(
+  'users/fetchByIdStatus',
+  async (userId: number, thunkAPI) => {
+    const response = await userAPI.fetchById(userId)
+    return response.data
+  },
+)
+```
+
+We need to call the createAsyncThunk function with the action type name `'users/fetchByIdStatus'` and callback function. The callback function is mandatory
+to be asynchronous because we need those three promise states to hanlde the status, error or data according to the promise result.
+Because the promise can success or fail.
+
+```js
+// userSlice.js
+const initialState = {
+  data: [],
+  status: 'idle',
+  error: null,
+};
+
+const usersSlice = createSlice({
+  name: 'users',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) =>
+    builder
+      .addCase(fetchUserById.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchUserById.fulfilled, (state, action) => {
+        state.data.push(action.payload);
+        state.status = 'success';
+      })
+      .addCase(fetchUserById.rejected, (state, action) => {
+        state.status = 'error';
+        state.error = action.error.message;
+      }),
+});
+```
+
+We use extraReducers and reducers to respond to an action in the slice . It may seem they are similar but the major difference is
+extraReducers provides the builder API where we can add case for different type of action kind of like a switch statement. However in
+reducer we just pass the name of the action function and handle the case when that reducer function is dispatched. for example if the
+promise is pending the it sets the status to "loading" and changed accordingly to the case type.
+
+### References
+
+- [official redux docs](https://redux.js.org/introduction/getting-started)
