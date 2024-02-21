@@ -4,3 +4,102 @@ description: 'Explanation of react query for fetching remote data, creating muta
 publishedAt: '2023-12-17'
 type: Blog
 ---
+
+TanStack query is library that simplifies the way we fetch, cache and synchronize data from the server. TanStack query can be used
+for multiple library and frameworks like react, vue, svelte and even react native 😲. We can also control when to refetch the data on certain conditions
+like refetch when the window is focused again. In this blog i am going to show how to fetch and mutate data from the server using react query.
+
+But before let's see how we typically used to get the data from the server without using react query or other packages for data fetching.
+
+```js
+import { useState, useEffect } from 'react';
+
+export const useFetch = (url) => {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(response.statusText);
+        const json = await response.json();
+        setIsLoading(false);
+        setData(json);
+        setError(null);
+      } catch (error) {
+        setError(`${error} Could not Fetch Data `);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [url]);
+  return { data, isLoading, error };
+};
+```
+
+The custom useFetch hook is okay just for fetching it gives us nice loading, or error state
+but there are many other problems that this custom hooks cannot handle:
+
+- when a certain mutation happen the fetch data should be be recalled for synchronizing data with server.
+- Just fetch cannot handle the post, patch and delete we need to handle mutation manually with other mutation hooks.
+- cannot control the advance fetching like refetch, prefetch removing unused query cache and more.
+- writting many fetch and mutation hook will create spaghetti code.
+
+So to solve this problem `react query` comes. There are other packages out there to handle these like [RTK query](https://redux-toolkit.js.org/rtk-query/overview),
+[SWR](https://swr.vercel.app/docs/getting-started) but we are going to use react query because i feel `TanStack query` is more powerful in
+terms of control over other packages.
+
+### Installation
+
+```js
+yarn add @tanstack/react-query
+```
+
+React query is like a module of tanstack query since tanstack query can be used for multiple library and frameworks, there are collection of modules for
+each library or framework like `@tanstack/react-query` for react `@tanstack/vue-query` for vue and so on.
+
+### Query Client Provider
+
+```js
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const ONE_MIN = 60 * 1000;
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: ONE_MIN } },
+});
+
+function App() {
+  return <QueryClientProvider client={queryClient}>...</QueryClientProvider>;
+}
+```
+
+To perform fetching, mutation and use the query client first we need to initailize the query client
+with the query client provider. We can pass some defaultOptions to query client if noting is passed on query client options than the default value will
+be kept for example if we do not specify the `staleTime` then it will set as 0 meaning the query will immediately
+refetch when it mounts. Similary there is property `refetchOnWindowFocus` as the name says it will refetch on the window focus after comming to the window after another
+tab or so by default refetchOnWindowFocus is set to true. You can check other options by checking the [docs](https://tanstack.com/query/v4/docs/reference/QueryClient).
+
+### Fetching the data
+
+```js
+import { useQuery } from '@tanstack/react-query';
+import { getBookings } from '../../services/api';
+
+export function useBookings() {
+  const { data: bookings, isLoading } = useQuery({
+    queryKey: ['bookings'],
+    queryFn: getBookings,
+    staleTime: 0, // we can override the stale time from the query client.
+  });
+
+  return { bookings, isLoading };
+}
+```
+
+`useQuery` function is used to fetch the data and control some options like refetchOnWindowFocus, retry, number of retries and more.
+The best part of react query is caching the data for example if we use this useBookings hook in multiple components it will not
+hit the API call multiple times but only ones, that is all handled by the queryKey that we pass to `useQuery` hook. The `'bookings'`
+string is the unique identifier for this useBookings hook. So if the query key remains the same data is returned from the cache 😍.

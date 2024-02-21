@@ -236,7 +236,6 @@ and dispatch the lifecycle actions (pending, fulfilled, rejected) based on the r
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { userAPI } from './userAPI';
 
-
 const fetchUserById = createAsyncThunk(
   'users/fetchByIdStatus',
   async (userId: number, thunkAPI) => {
