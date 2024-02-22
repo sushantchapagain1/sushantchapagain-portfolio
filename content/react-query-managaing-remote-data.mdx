@@ -1,7 +1,7 @@
 ---
 title: 'Managing remote data using react query.'
 description: 'Explanation of react query for fetching remote data, creating mutation, optimization and writing clean react query code.'
-publishedAt: '2023-12-17'
+publishedAt: '2023-3-17'
 type: Blog
 ---
 
@@ -99,7 +99,229 @@ export function useBookings() {
 }
 ```
 
+```js
+// api.js your api looks something like this.
+export const getBookings = async function () {
+  const response = await api.get(`/bookings`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  return response?.data;
+};
+```
+
+```js
+// BookingTable.jsx
+function BookingTable() {
+  const { bookings, isLoading } = useBookings();
+
+  if (isLoading) return <Spinner />;
+
+  if (!bookings.length) return <Empty resourceName="bookings" />;
+
+  // render component with data accordingly
+}
+
+export default BookingTable;
+```
+
 `useQuery` function is used to fetch the data and control some options like refetchOnWindowFocus, retry, number of retries and more.
 The best part of react query is caching the data for example if we use this useBookings hook in multiple components it will not
 hit the API call multiple times but only ones, that is all handled by the queryKey that we pass to `useQuery` hook. The `'bookings'`
 string is the unique identifier for this useBookings hook. So if the query key remains the same data is returned from the cache 😍.
+
+### Dynamically fetching the data
+
+```js
+import { useQuery } from '@tanstack/react-query';
+import { getBooking } from '../../services/api';
+import { useParams } from 'react-router-dom';
+
+export function useBooking() {
+  const { bookingId } = useParams();
+
+  const { data: booking, isLoading } = useQuery({
+    queryKey: ['booking', bookingId],
+    queryFn: () => getBooking(bookingId),
+    retry: false,
+  });
+
+  return { booking, isLoading };
+}
+```
+
+There will be situations where we need to fetch data dynamically for example based on a id of a booking. The data will
+be different depending on the id of the booking so to fetch the data again when the id of the booking changes we simply pass the
+changing value in the `queryKey` the `queryKey` does not needs to be string it can hold value thats why we have the bracket notion.
+Notice the bookingId which is the value for the queryKey changes, as soon the bookingId changes the another API call is made.
+Its like a dependency in a useEffect hook when the value changes the function remounts in this case.
+
+### Devtools
+
+```js
+yarn add @tanstack/react-query-devtools
+```
+
+```js
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+<QueryClientProvider client={queryClient}>
+  <ReactQueryDevtools initialIsOpen={false} />
+  ...
+</QueryClientProvider>;
+```
+
+To use the react query devtools we need to add the `@tanstack/react-query-devtools` dependency and pass inside the `QueryClientProvider`.
+The react query devtools is the most handy devtools that i used while developing the application unlike react devtools the component tree will be so huge that
+its gets hard to see the tree and find the component when i need to see the state and props however i like the profiler tab to see the chart and nice message
+why the component rerender or stayed the same across multiple renders.
+
+<Image
+  src="/static/blogs/react-query-devtools.gif"
+  alt="react query devtools"
+  width="850"
+  height="820"
+/>
+
+Developers can see the state of all queries and mutation in a single dashboard kind of thing. Developers can see the fresh data, stale data, inactive data, loading state.
+also the mutation can be filtered we can toggle the wifi, delete query from cache and more.
+
+### Mutating the data.
+
+```js
+import { useMutation } from '@tanstack/react-query';
+import { createBooking } from '../../services/api';
+import toast from 'react-hot-toast';
+
+export function useCreateBooking() {
+  const { mutate: create, isLoading: isCreating } = useMutation({
+    mutationKey: ['create-booking'],
+    mutationFn: (dataObj) => updateBooking(dataObj),
+    onSuccess: (data) => {
+      toast.success(`Booking created successfully !`);
+    },
+    onError: () => {
+      toast.error('There was an error creating booking');
+    },
+  });
+
+  return { create, isCreating };
+}
+```
+
+`useMutation` hook is used to change the data in the server, in useQuery the queryFn used to be the get method but in `useMutation`
+the mutationFn must be post, patch or delete method. We also get `onSuccess`, `onError` methods to show some nice notification and also debug from the console.
+
+```js
+// createBookingForm.jsx
+import { useCreateBooking } from '../../hooks/bookings/useCreateBooking';
+
+function createBookingForm() {
+  const [bookingData, setBookingData] = useState('');
+  const { isCreating, create } = useCreateBooking();
+
+  function handleCreateBooking(e) {
+    e.preventDefault();
+    mutate(
+      { bookingData },
+      // we can access the onSuccess and onError methods where we call the mutate fn
+      {
+        onSuccess: () => {
+          // we can use this method for resetting some states.
+        },
+      },
+    );
+  }
+
+  return (
+    <form onSubmit={handleCreateBooking}>
+      <input
+        type="text"
+        name="bookingData"
+        onChange={(e) => setBookingData(e.target.value)}
+      />
+      <button type="submit">create</button>
+    </form>
+  );
+}
+
+export default createBookingForm;
+```
+
+We just need to simply call the mutate method when the submit event is triggered and rest is handled by `useMutation`. However i see lot
+of developers resetting the form or resetting the state after mutate function which is very bad ux because the mutation
+can fail too, so you should always use the `onSuccess` and `onError` methods avaliable in the mutate function.
+
+```js
+// not to do this way.
+function handleCreateBooking(e) {
+  e.preventDefault();
+  mutate({ bookingData });
+  setBookingData('');
+}
+```
+
+### Synchronizing
+
+Imaging When we perform a mutation in a table then the result is always new or the data is stale, for example when we delete one booking from the db,
+the list of booking data is new. So without react query we have to manually reload the browser and get the synchronized data.
+In react query we can use so called `invalidateQueries` method to synchronize data.
+
+```js
+import { useMutation, useQueryClient } from '@tanstack/react-query'; // get the queryClient that we specify in provider.
+import { createBooking } from '../../services/api';
+import toast from 'react-hot-toast';
+
+export function useCreateBooking() {
+  const queryClient = useQueryClient(); // can use the queryClient with this hook.
+
+  const { mutate: create, isLoading: isCreating } = useMutation({
+    mutationKey: ['create-booking'],
+    mutationFn: (dataObj) => updateBooking(dataObj),
+    onSuccess: (data) => {
+      toast.success(`Booking created successfully !`);
+      queryClient.invalidateQueries({
+        queryKey: ['bookings'], // the query key that we want to synchronize after new data is added.
+      });
+    },
+    onError: () => {
+      toast.error('There was an error creating booking');
+    },
+  });
+
+  return { create, isCreating };
+}
+```
+
+### Removing queries
+
+There might be sitautions where we donot want any query to remain in cache. for example we dont want to store the user that just loggoed
+out from the application so TanStack team also thought about those sitautions, to implement this we use the `removeQueries` method.
+
+```js
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { logout as logoutApi } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
+export function useLogout() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { mutate: logout, isLoading } = useMutation({
+    mutationKey: ['logout'],
+    mutationFn: logoutApi,
+    onSuccess: () => {
+      queryClient.removeQueries(); // removes all queries from the cache.
+      //  remove queries from the cache based on their query keys.
+      // queryClient.removeQueries({ queryKey, exact: true });
+      navigate('/login', { replace: true });
+    },
+    onError: (err) => toast.error(err.message),
+  });
+
+  return { logout, isLoading };
+}
+```
