@@ -325,3 +325,34 @@ export function useLogout() {
   return { logout, isLoading };
 }
 ```
+
+### Prefetching
+
+With react query we can `prefetch` the data they need before it's needed If this is the case, you can use the `prefetchQuery`
+method to `prefetch` the results of a query to be placed into the cache.
+
+Assuming there is pagination in both API and client side a `user` is seeing the 1st page in bookings table and the user clicks on next page
+which is 2nd page, normally there will be a new get request for the 2nd page so user has to wait until it gets download but we can go a
+step ahead by pre fetching the data of next and prev page and keeping in the cache while user is looking at the data of 2nd page. `prefetchQuery`
+function will download the page 1st and 3rd page so that will result a great user experience by removing those anoying loading indicators.
+
+```js
+// useBooking.js
+if (pageNum < pageCount)
+  queryClient.prefetchQuery({
+    queryKey: ['bookings', pageNum + 1],
+    queryFn: () => getBookings({ pageNum: pageNum + 1 }),
+  });
+if (pageNum > 1)
+  queryClient.prefetchQuery({
+    queryKey: ['bookings', pageNum - 1],
+    queryFn: () => getBookings({ pageNum: pageNum - 1 }),
+  });
+```
+
+That's it for this blog guys, of course i have not covered everything about tanstack query there is a lot of stuffs to look through in tanstack query but if you want to know other
+topics like `Query filters`, `inifiteQueries` for infinite scrolling apps and more you can check out the offical tanstack docs and implement in your code 👋.
+
+### References
+
+- [official tanstack query docs](https://tanstack.com/query/v3/docs/framework/react/overview)

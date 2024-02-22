@@ -1,6 +1,6 @@
 export const siteMetadata = {
-  // url: 'http://sushantchapagain1.com',
-  url: 'https://sushantchapagain.vercel.app',
+  url: 'http://sushantchapagain1.com',
+  // url: 'https://sushantchapagain.vercel.app',
   title: {
     default: 'Home | Sushant Chapagain',
     template: '%s | Sushant Chapagain', // %s is a special placeholder by next.
