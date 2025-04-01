@@ -4,62 +4,36 @@ import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { navlinks } from '../../data/links';
-import Hamburger from './Hamburger';
-import React, { useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 
 function Navlinks() {
   const pathName = usePathname();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  function handleMenuToggle() {
-    setIsMenuOpen((open) => !open);
-  }
-
-  function closeMenu() {
-    setIsMenuOpen(false);
-  }
-
   return (
-    <>
-      {/*  tw is first mobile first so resetting the styling from medium devices. */}
-      <nav
-        className={cn(
-          'pointer-events-none invisible translate-y-full opacity-0 transition-all duration-700 md:pointer-events-auto md:visible md:translate-y-0 md:opacity-100',
-          isMenuOpen &&
-            'pointer-events-auto visible absolute left-0 top-0 z-10 h-screen w-full translate-y-0 bg-navigationBg opacity-100 md:relative md:h-auto md:bg-transparent',
-        )}
-      >
-        <ul
-          className={cn(
-            'hidden gap-6 capitalize md:flex',
-            isMenuOpen &&
-              'flex h-full flex-col items-center justify-center md:flex-row',
-          )}
-        >
-          {navlinks.map((link) => {
-            const isActive = pathName === link.href;
-            return (
-              <li
-                key={link.href}
+    <nav className="flex w-full justify-between">
+      <ul className="grid grid-cols-[repeat(3,4.5em)] text-center capitalize">
+        {navlinks.map((link) => {
+          const isActive = pathName === link.href;
+          return (
+            <li
+              key={link.href}
+              className="p-1 text-sm text-lightText transition duration-200 hover:font-medium hover:text-navlinks md:text-base"
+            >
+              <Link
                 className={cn(
-                  'p-1 font-light text-lightText transition hover:text-navlinks',
-                  isActive && 'border-b-[1px] border-lightText text-navlinks',
+                  'border-b-2 border-transparent pb-2 ',
+                  isActive && 'border-navlinks font-medium text-navlinks',
                 )}
-                onClick={closeMenu}
+                href={link.href}
               >
-                <Link href={link.href}>{link.label}</Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-
-      {/* not created context cz only need to pass down the tree by one parent.*/}
-      <ThemeToggle isMenuOpen={isMenuOpen} />
-      <Hamburger isMenuOpen={isMenuOpen} onToggleHamburger={handleMenuToggle} />
-    </>
+                {link.label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+      <ThemeToggle />
+    </nav>
   );
 }
 

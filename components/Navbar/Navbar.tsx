@@ -1,10 +1,8 @@
 import Navlinks from './Navlinks';
-import Logo from './Logo';
 
 function Navbar() {
   return (
-    <header className="flex items-center justify-between">
-      <Logo />
+    <header className="flex items-center justify-between pt-3">
       <Navlinks />
     </header>
   );

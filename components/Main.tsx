@@ -30,7 +30,7 @@ function Main() {
             mail
           </a>
           or you can contact me through my social media handles.
-          <ul className="mt-6 flex gap-6">
+          <ul className="mt-6 flex gap-3">
             {socialLinks.map((socialLink) => (
               <li key={socialLink.href}>
                 <SocailIcon {...socialLink} />

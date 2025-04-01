@@ -39,13 +39,22 @@ body {
   background-color: var(--app-bg);
 }
 
-.stroke-name {
+/* .stroke-name {
   @apply relative after:absolute after:left-0 after:top-0 after:w-0 
   after:animate-[nameAnimate_1.8s_linear_both] after:overflow-hidden
    after:whitespace-nowrap after:text-[color:var(--foreground-text)] 
    after:content-["I'm_Sushant_Chapagain"];
   -webkit-text-stroke: 1px var(--foreground-text);
+} */
+
+.stroke-name {
+  @apply relative after:absolute after:left-0 after:top-0 
+   after:w-full after:overflow-hidden
+   after:whitespace-nowrap after:text-[color:var(--foreground-text)] 
+   after:content-["I'm_Sushant_Chapagain"];
+  -webkit-text-stroke: 1px var(--foreground-text);
 }
+
 @keyframes nameAnimate {
   0% {
     width: 0;
