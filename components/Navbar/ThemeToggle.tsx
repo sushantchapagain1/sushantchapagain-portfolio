@@ -6,7 +6,7 @@ function ThemeToggle() {
   const { toggleDarkMode } = useTheme();
 
   return (
-    <button onClick={toggleDarkMode}>
+    <button onClick={toggleDarkMode} aria-label="toggle-theme">
       <ThemeToogleIcon height={24} width={24} className="fill-foregroundText" />
     </button>
   );

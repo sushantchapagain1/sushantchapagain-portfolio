@@ -33,7 +33,7 @@ function Main() {
           <ul className="mt-6 flex gap-3">
             {socialLinks.map((socialLink) => (
               <li key={socialLink.href}>
-                <SocailIcon {...socialLink} />
+                <SocailIcon {...socialLink} aria-label={socialLink.name} />
               </li>
             ))}
           </ul>

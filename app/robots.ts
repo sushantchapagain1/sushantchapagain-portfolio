@@ -6,7 +6,7 @@ import { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: '*', allow: '/', disallow: '/not-found' }],
-    sitemap: 'sitemap/url',
+    // sitemap: 'sitemap/url', https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
     //  its like a helper for web crawlers like  Bing, Yandex, Baidu, Naver, Yahoo or DuckDuckGo) .
     // if we have 1000 pages then sitemap will force not to overlook other unneeded pages.
     // https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap for creating a sitemap
